@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm dev)",
+      "WebFetch(domain:blog.acofork.com)",
+      "WebSearch",
+      "Bash(curl:*)",
+      "Bash(node -e:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(copy:*)",
+      "Bash(ffmpeg:*)",
+      "Bash(python -c:*)",
+      "Bash(pip install:*)",
+      "Bash(gh auth status:*)",
+      "Bash(winget:*)",
+      "Bash(scoop:*)",
+      "Bash(\"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" auth login:*)",
+      "Bash(\"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" repo create:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(git push:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)"
+    ]
+  }
+}

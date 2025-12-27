@@ -1,0 +1,26 @@
+---
+interface Props {
+  slug: string;
+}
+const { slug } = Astro.props;
+---
+
+<div class="mt-8 pt-6 border-t border-black/10 dark:border-white/10">
+  <h2 class="text-xl font-bold mb-4 text-neutral-900 dark:text-neutral-100">评论</h2>
+  <script src="https://giscus.app/client.js"
+        data-repo="muyuzier-afk/pinglunqu"
+        data-repo-id="R_kgDOQvpIPw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOQvpIP84C0SOl"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark_tritanopia"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+  </script>
+</div>

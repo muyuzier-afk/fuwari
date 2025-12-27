@@ -5,6 +5,39 @@ import { url } from "../../utils/url-utils";
 import ImageWrapper from "../misc/ImageWrapper.astro";
 
 const config = profileConfig;
+
+const quotes = [
+	"站在风口上，猪都能飞起来。",
+	"人因梦想而伟大。",
+	"永远相信美好的事情即将发生。",
+	"做一个好人，做一个有良心的人。",
+	"专注、极致、口碑、快。",
+	"要做就做到最好。",
+	"创业就是干别人没干过的事。",
+	"成功的关键是找到风口。",
+	"简单的事情重复做，你就是专家。",
+	"不要用战术上的勤奋掩盖战略上的懒惰。",
+	"厚道的人运气不会太差。",
+	"把朋友弄得多多的，把敌人弄得少少的。",
+	"我不是什么劳模，我只是热爱我的工作。",
+	"认真做好每一件小事。",
+	"要顺势而为，不要逆势而动。",
+	"保持饥饿，保持愚蠢。",
+	"做自己喜欢的事，成功的概率会更大。",
+	"人生就是一场修行。",
+	"坚持做正确的事。",
+	"用真诚打动人心。",
+	"勤奋是成功的基础。",
+	"学会放下，才能走得更远。",
+	"相信自己，相信团队。",
+	"细节决定成败。",
+	"做事要有始有终。",
+	"保持谦逊，持续学习。",
+	"机会总是留给有准备的人。",
+	"失败是成功之母。",
+	"做人要有格局。",
+	"时间是最宝贵的资源。",
+];
 ---
 <div class="card-base p-3">
     <a aria-label="Go to About Page" href={url('/about/')}
@@ -21,7 +54,7 @@ const config = profileConfig;
     <div class="px-2">
         <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">{config.name}</div>
         <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
-        <div class="text-center text-neutral-400 mb-2.5 transition">{config.bio}</div>
+        <div id="quote-container" class="text-center text-neutral-400 mb-2.5 transition text-sm min-h-[3rem]" data-quotes={JSON.stringify(quotes)}></div>
         <div class="flex flex-wrap gap-2 justify-center mb-1">
             {config.links.length > 1 && config.links.map(item =>
                     <a rel="me" aria-label={item.name} href={item.url} target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90">
@@ -37,3 +70,31 @@ const config = profileConfig;
     </div>
 </div>
 
+<script>
+function initQuotes() {
+	const container = document.getElementById('quote-container');
+	if (!container) return;
+	const quotes = JSON.parse(container.dataset.quotes || '[]');
+	if (quotes.length === 0) return;
+
+	let index = Math.floor(Math.random() * quotes.length);
+	container.textContent = quotes[index];
+
+	setInterval(() => {
+		container.style.opacity = '0';
+		setTimeout(() => {
+			index = (index + 1) % quotes.length;
+			container.textContent = quotes[index];
+			container.style.opacity = '1';
+		}, 300);
+	}, 10000);
+}
+initQuotes();
+document.addEventListener('astro:after-swap', initQuotes);
+</script>
+
+<style>
+#quote-container {
+	transition: opacity 0.3s ease;
+}
+</style>

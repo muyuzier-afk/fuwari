@@ -3,6 +3,8 @@ import type { AUTO_MODE, DARK_MODE, LIGHT_MODE } from "@constants/constants";
 export type SiteConfig = {
 	title: string;
 	subtitle: string;
+	description: string;
+	keywords: string[];
 
 	lang:
 		| "en"
@@ -17,7 +19,7 @@ export type SiteConfig = {
 		| "id";
 
 	themeColor: {
-		hue: number;
+		hex: string; // 主题色 hex 值，如 "#f06a8b"
 		fixed: boolean;
 	};
 	banner: {

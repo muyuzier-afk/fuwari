@@ -37,7 +37,7 @@ const isHomePage = pathsEqual(Astro.url.pathname, url("/"));
 
 // defines global css variables
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
-const configHue = siteConfig.themeColor.hue;
+const configHex = siteConfig.themeColor.hex;
 if (!banner || typeof banner !== "string" || banner.trim() === "") {
 	banner = siteConfig.banner.src;
 }
@@ -81,13 +81,14 @@ const bannerOffset =
 		<title>{pageTitle}</title>
 
 		<meta charset="UTF-8" />
-		<meta name="description" content={description || pageTitle}>
+		<meta name="description" content={description || siteConfig.description}>
+		<meta name="keywords" content={siteConfig.keywords.join(", ")}>
 		<meta name="author" content={profileConfig.name}>
 
 		<meta property="og:site_name" content={siteConfig.title}>
 		<meta property="og:url" content={Astro.url}>
 		<meta property="og:title" content={pageTitle}>
-		<meta property="og:description" content={description || pageTitle}>
+		<meta property="og:description" content={description || siteConfig.description}>
 		{setOGTypeArticle ? (
         <meta property="og:type" content="article" />
         ) : (
@@ -97,10 +98,12 @@ const bannerOffset =
 		<meta name="twitter:card" content="summary_large_image">
 		<meta property="twitter:url" content={Astro.url}>
 		<meta name="twitter:title" content={pageTitle}>
-		<meta name="twitter:description" content={description || pageTitle}>
+		<meta name="twitter:description" content={description || siteConfig.description}>
 
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href={Astro.url} />
 		{favicons.map(favicon => (
 			<link rel="icon"
 				  href={favicon.src.startsWith('/') ? url(favicon.src) : favicon.src}
@@ -110,7 +113,28 @@ const bannerOffset =
 		))}
 
 		<!-- Set the theme before the page is rendered to avoid a flash -->
-		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH, configHue}}>
+		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH, configHex}}>
+			// hex 转 hue
+			function hexToHue(hex) {
+				const r = parseInt(hex.slice(1, 3), 16) / 255;
+				const g = parseInt(hex.slice(3, 5), 16) / 255;
+				const b = parseInt(hex.slice(5, 7), 16) / 255;
+				const toLinear = (c) => c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+				const lr = toLinear(r), lg = toLinear(g), lb = toLinear(b);
+				const x = 0.4124564 * lr + 0.3575761 * lg + 0.1804375 * lb;
+				const y = 0.2126729 * lr + 0.7151522 * lg + 0.0721750 * lb;
+				const z = 0.0193339 * lr + 0.1191920 * lg + 0.9503041 * lb;
+				const l_ = 0.8189330101 * x + 0.3618667424 * y - 0.1288597137 * z;
+				const m_ = 0.0329845436 * x + 0.9293118715 * y + 0.0361456387 * z;
+				const s_ = 0.0482003018 * x + 0.2643662691 * y + 0.6338517070 * z;
+				const l3 = Math.cbrt(l_), m3 = Math.cbrt(m_), s3 = Math.cbrt(s_);
+				const a = 1.9779984951 * l3 - 2.4285922050 * m3 + 0.4505937099 * s3;
+				const bVal = 0.0259040371 * l3 + 0.7827717662 * m3 - 0.8086757660 * s3;
+				let h = Math.atan2(bVal, a) * 180 / Math.PI;
+				if (h < 0) h += 360;
+				return Math.round(h);
+			}
+
 			// Load the theme from local storage
 			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
 			switch (theme) {
@@ -128,9 +152,10 @@ const bannerOffset =
 					}
 			}
 
-			// Load the hue from local storage
-			const hue = localStorage.getItem('hue') || configHue;
-			document.documentElement.style.setProperty('--hue', hue);
+			// Load the hex color from local storage and convert to hue
+			const hex = localStorage.getItem('themeHex') || configHex;
+			document.documentElement.style.setProperty('--theme-hex', hex);
+			document.documentElement.style.setProperty('--hue', hexToHue(hex));
 
 			// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
 			let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
@@ -138,7 +163,7 @@ const bannerOffset =
 			document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
 		</script>
 		<style define:vars={{
-			configHue,
+			configHex,
 			'page-width': `${PAGE_WIDTH}rem`,
 		}}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 
@@ -154,6 +179,28 @@ const bannerOffset =
 		<ConfigCarrier></ConfigCarrier>
 		<slot />
 
+		<script is:inline>
+console.log(`
+%c███╗   ███╗ ██████╗ ███████╗
+%c████╗ ████║██╔═══██╗██╔════╝
+%c██╔████╔██║██║   ██║█████╗
+%c██║╚██╔╝██║██║   ██║██╔══╝
+%c██║ ╚═╝ ██║╚██████╔╝███████╗
+%c╚═╝     ╚═╝ ╚═════╝ ╚══════╝
+%c
+欢迎访问 MOEHANS 的 BLOG
+Welcome to MOEHANS's BLOG
+MOEHANSのブログへようこそ
+MOEHANS 블로그에 오신 것을 환영합니다
+Bienvenue sur le blog de MOEHANS
+Willkommen im MOEHANS Blog
+Bienvenido al blog de MOEHANS
+Добро пожаловать в блог MOEHANS
+`,
+'color:#ec4899','color:#ec4899','color:#ec4899','color:#ec4899','color:#ec4899','color:#ec4899','color:#888'
+);
+		</script>
+
 		<!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
 		<div id="page-height-extend" class="hidden h-[300vh]"></div>
 	</body>
@@ -164,6 +211,24 @@ const bannerOffset =
 	'banner-height-home': `${BANNER_HEIGHT_HOME}vh`,
 	'banner-height': `${BANNER_HEIGHT}vh`,
 }}>
+html {
+	background-image: url('https://pics.moehans.com/pic?img=ua');
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+	position: relative;
+}
+html::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	pointer-events: none;
+	z-index: -1;
+}
 @tailwind components;
 @layer components {
 	.enable-banner.is-home #banner-wrapper {
@@ -202,7 +267,7 @@ import {
 	// SizeObserverPlugin,
 	// ClickScrollPlugin
 } from 'overlayscrollbars';
-import {getHue, getStoredTheme, setHue, setTheme} from "../utils/setting-utils";
+import {getHex, getStoredTheme, setHex, setTheme} from "../utils/setting-utils";
 import {pathsEqual, url} from "../utils/url-utils";
 import {
 	BANNER_HEIGHT,
@@ -282,8 +347,8 @@ function loadTheme() {
 	setTheme(theme)
 }
 
-function loadHue() {
-	setHue(getHue())
+function loadHex() {
+	setHex(getHex())
 }
 
 function initCustomScrollbar() {
@@ -366,7 +431,7 @@ function showBanner() {
 function init() {
 	// disableAnimation()()		// TODO
 	loadTheme();
-	loadHue();
+	loadHex();
 	initCustomScrollbar();
 	showBanner();
 }
