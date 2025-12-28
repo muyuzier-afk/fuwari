@@ -8,11 +8,23 @@ const currentYear = new Date().getFullYear();
 
 <script defer src="https://my-umami-moe.zeabur.app/script.js" data-website-id="c18133ba-c744-49cc-a524-fae7e991e55c"></script>
 
+<script>
+fetch('/api/stats')
+  .then(r => r.json())
+  .then(d => {
+    document.getElementById('site-pv').textContent = d.pageviews;
+    document.getElementById('site-uv').textContent = d.visitors;
+  })
+  .catch(() => {});
+</script>
+
 <!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">-->
 <div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div>
 <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">-->
 <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6">
     <div class="transition text-50 text-sm text-center">
+        本站访客数 <span id="site-uv">--</span> 人次 · 访问量 <span id="site-pv">--</span> 次
+        <br>
         &copy; <span id="copyright-year">{currentYear}</span>
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="#">{profileConfig.name}</a>，采用
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可
