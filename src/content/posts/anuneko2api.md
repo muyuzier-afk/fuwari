@@ -2,7 +2,7 @@
 title: 使用Zeabur部署Anuneko2API
 published: 2025-12-28
 description: Anuneko太豪玩啦辣
-image: ""
+image:
 tags:
   - AI
   - LLM
