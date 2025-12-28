@@ -8,7 +8,7 @@ import type {
 import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
-	title: "MOEHANS",
+	title: "MOEHANS BLOG",
 	subtitle: "技术博客",
 	description: "分享 AI、Serverless、云原生等前沿技术的情报、分析与实战教程",
 	keywords: ["AI", "Claude Code", "Codex", "Serverless", "Cloudflare", "Python", "React", "技术博客", "教程"],
