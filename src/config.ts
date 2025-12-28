@@ -9,7 +9,7 @@ import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
 	title: "MOEHANS BLOG",
-	subtitle: "技术博客",
+	subtitle: "分享 AI、Serverless、云原生等前沿技术",
 	description: "分享 AI、Serverless、云原生等前沿技术的情报、分析与实战教程",
 	keywords: ["AI", "Claude Code", "Codex", "Serverless", "Cloudflare", "Python", "React", "技术博客", "教程"],
 	lang: "zh_CN", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
