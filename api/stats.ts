@@ -3,22 +3,22 @@ export const config = { runtime: 'edge' };
 const UMAMI_URL = 'https://my-umami-moe.zeabur.app';
 const WEBSITE_ID = 'c18133ba-c744-49cc-a524-fae7e991e55c';
 
-async function getToken() {
+async function getToken(env: { UMAMI_USERNAME?: string; UMAMI_PASSWORD?: string }) {
   const res = await fetch(`${UMAMI_URL}/api/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      username: process.env.UMAMI_USERNAME,
-      password: process.env.UMAMI_PASSWORD,
+      username: env.UMAMI_USERNAME,
+      password: env.UMAMI_PASSWORD,
     }),
   });
   const data = await res.json();
   return data.token;
 }
 
-export default async function handler(req: Request) {
+export default async function handler(req: Request, context: { env: { UMAMI_USERNAME?: string; UMAMI_PASSWORD?: string } }) {
   try {
-    const token = await getToken();
+    const token = await getToken(context.env);
     const now = Date.now();
     const res = await fetch(
       `${UMAMI_URL}/api/websites/${WEBSITE_ID}/stats?startAt=0&endAt=${now}`,
