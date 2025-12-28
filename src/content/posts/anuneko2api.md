@@ -19,64 +19,70 @@ draft: false
 
 ## 准备工作
 
-打开 Anuneko 并登录，按 `F12` 打开开发者工具，发送一条消息：
+打开F12发送消息测试一下
 
 ![](../assets/images/anuneko2api/屏幕截图%202025-12-28%20170942.png)
 
-找到请求头中的 `X-Token`：
+提取X-Token
 
 ![](../assets/images/anuneko2api/屏幕截图%202025-12-28%20171340.png)
 
-在 Application → Cookies 中找到 `uk`：
+提取cookies里的uk
 
 ![](../assets/images/anuneko2api/屏幕截图%202025-12-28%20171515.png)
 
-提取 `chat_id`：
+提取chat id
 
 ![](../assets/images/anuneko2api/屏幕截图%202025-12-28%20171921.png)
 
-## 部署到 Zeabur
+## 部署到Zeabur
 
-打开 [Zeabur](https://zeabur.com) 创建项目，选择 GitHub：
+打开zeabur创建项目
 
 ![](../assets/images/anuneko2api/屏幕截图%202025-12-28%20172214.png)
 
+点击Github
+
 ![](../assets/images/anuneko2api/屏幕截图%202025-12-28%20172247.png)
 
-Fork [2API 仓库](https://github.com/muyuzier-afk/2api)：
+前往 [2API](https://github.com/muyuzier-afk/2api) 点击Fork
 
 ![](../assets/images/anuneko2api/屏幕截图%202025-12-28%20172335.png)
 
+点击Create Fork
+
 ![](../assets/images/anuneko2api/屏幕截图%202025-12-28%20172349.png)
 
-配置 GitHub 并选择 2api 仓库：
+回到Zeabur点击配置Github
 
 ![](../assets/images/anuneko2api/屏幕截图%202025-12-28%20172258.png)
 
+选择自己的账户
+
 ![](../assets/images/anuneko2api/屏幕截图%202025-12-28%20172403.png)
+
+点击install
 
 ![](../assets/images/anuneko2api/屏幕截图%202025-12-28%20172415.png)
 
+选择2api
+
 ![](../assets/images/anuneko2api/屏幕截图%202025-12-28%20172502.png)
 
-添加环境变量：
+前往环境变量
 
 ![](../assets/images/anuneko2api/屏幕截图%202025-12-28%20172605.png)
+
+添加配置
 
 ![](../assets/images/anuneko2api/屏幕截图%202025-12-28%20172726.png)
 
 ```
-COOKIE_UK=你的uk值
-X_TOKEN=你的x-token值
-CHAT_ID=你的chat_id值
+COOKIE_UK=
+X_TOKEN=
+CHAT_ID=
 ```
 
-重新部署后复制域名即可使用：
+重新部署完成后复制域名就能用了，模型和密钥随便填
 
 ![](../assets/images/anuneko2api/屏幕截图%202025-12-28%20172744.png)
-
-## 使用方法
-
-- **API Base URL**: `https://你的zeabur域名`
-- **API Key**: 随便填
-- **Model**: 随便填
