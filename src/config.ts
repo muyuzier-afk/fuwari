@@ -54,7 +54,7 @@ export const navBarConfig: NavBarConfig = {
 		},
 		{
 			name: "Umami",
-			url: "https://my-umami-moe.zeabur.app/websites/c18133ba-c744-49cc-a524-fae7e991e55c",
+			url: "https://my-umami-moe.zeabur.app/share/9FKc0Hved5msF0mI",
 			external: true,
 		},
 	],
