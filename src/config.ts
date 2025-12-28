@@ -53,6 +53,11 @@ export const navBarConfig: NavBarConfig = {
 			url: "https://screen.moehans.com/",
 			external: true,
 		},
+		{
+			name: "Umami",
+			url: "https://my-umami-moe.zeabur.app/websites/c18133ba-c744-49cc-a524-fae7e991e55c",
+			external: true,
+		},
 	],
 };
 
