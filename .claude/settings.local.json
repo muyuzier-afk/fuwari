@@ -26,7 +26,10 @@
       "Bash(npm install:*)",
       "Bash(vercel login:*)",
       "Bash(vercel:*)",
-      "WebFetch(domain:umami.is)"
+      "WebFetch(domain:umami.is)",
+      "Bash(for:*)",
+      "Bash(do mv \"$f\" \"../assets/images/anuneko2api/\")",
+      "Bash(done)"
     ]
   }
 }
