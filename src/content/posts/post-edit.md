@@ -1,11 +1,11 @@
 ---
-title: 自己写了个文章编辑器
+title: 写了个文章编辑器
 published: 2026-01-22
-description: ''
+description: 闲的没事Vibe文章编辑器.......
 image: 屏幕截图 2026-01-22 061304_1769033652325.png
 tags: "[]"
 category: 分享
 draft: false
 lang: ''
 ---
-
+由于**黑曜石**太难用了，市面上也没好的替代品，于是就用Flutter搞了给跨平台的笔记编辑器......
