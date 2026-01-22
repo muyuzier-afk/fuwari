@@ -1,8 +1,8 @@
-﻿---
+---
 title: FuwariStudio v1.0正式发布
 published: 2026-01-22
 description: 闲的没事Vibe的文章编辑器.......适用于Astro Fuwari
-image: JPEG_20260122_195732_2420647151095612769_1769083053469.jpg
+image: JPEG_20260123_035535_1560578054863014809_1769111738084.jpg
 tags:
   - 分享
   - FuwariStudio
@@ -40,4 +40,3 @@ Android 移动端界面:
 
 版权信息:
 MiSans Bold和MiSanS有关商标归小米公司所有。
-
