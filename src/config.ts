@@ -1,4 +1,4 @@
-import type {
+﻿import type {
 	ExpressiveCodeConfig,
 	LicenseConfig,
 	NavBarConfig,
@@ -9,12 +9,12 @@ import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
 	title: "MOEHANS BLOG",
-	subtitle: "分享 AI、Serverless、云原生等前沿技术",
-	description: "分享 AI、Serverless、云原生等前沿技术的情报、分析与实战教程",
-	keywords: ["AI", "Claude Code", "Codex", "Serverless", "Cloudflare", "Python", "React", "技术博客", "教程"],
+	subtitle: "Share AI, Serverless, and Cloud Native",
+	description: "Notes, analysis, and tutorials on AI, Serverless, and Cloud Native.",
+	keywords: ["AI", "Serverless", "Cloud Native", "Cloudflare", "Python", "React", "Tutorials", "Blog"],
 	lang: "zh_CN", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
 	themeColor: {
-		hex: "#ec4899", // 主题色 hex 值
+		hex: "#ec4899", // Theme color (hex)
 		fixed: false, // Hide the theme color picker for visitors
 	},
 	banner: {
@@ -50,11 +50,6 @@ export const navBarConfig: NavBarConfig = {
 		{
 			name: "流量监控",
 			url: "https://screen.moehans.com/",
-			external: true,
-		},
-		{
-			name: "Umami",
-			url: "https://my-umami-moe.zeabur.app/share/9FKc0Hved5msF0mI",
 			external: true,
 		},
 	],
@@ -94,3 +89,6 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 	// Please select a dark theme, as this blog theme currently only supports dark background color
 	theme: "github-dark",
 };
+
+
+
