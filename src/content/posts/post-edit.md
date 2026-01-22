@@ -31,8 +31,8 @@ Android 移动端界面:
 · 定制化字体：默认集成 MiSans Bold
 
 📥 下载与体验
-[链接文本](https://github.com/muyuzier-afk/FuwariStudio)
-前往我们的Github Release页面下载客户端或自行编译打包。
+
+前往我们的[Github Release](https://github.com/muyuzier-afk/FuwariStudio)页面下载客户端或自行编译打包。
 
 ---
 
