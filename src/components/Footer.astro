@@ -1,25 +1,44 @@
 ---
-
 import { profileConfig } from "../config";
 import { url } from "../utils/url-utils";
 
 const currentYear = new Date().getFullYear();
 ---
 
-<!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">-->
-<div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div>
-<!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">-->
-<div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6">
-    <div class="transition text-50 text-sm text-center">
-        &copy; <span id="copyright-year">{currentYear}</span>
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="#">{profileConfig.name}</a>，采用
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可
-        <br>
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('rss.xml')}>RSS</a> /
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('sitemap-index.xml')}>网站地图</a>
-        <br>
-        由
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> 和
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a> 强力驱动
-    </div>
+<div class="mt-10 mb-12">
+	<div class="card-base rounded-2xl px-6 py-8 text-center">
+		<div class="transition text-50 text-sm leading-relaxed">
+			&copy; <span id="copyright-year">{currentYear}</span>
+			<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="#">{profileConfig.name}</a>
+			，采用
+			<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+			许可
+			<br />
+			网站使用 Fuwari Studio 内容管理系统编辑
+			<br />
+			<a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url("rss.xml")}>RSS</a>
+			/
+			<a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url("sitemap-index.xml")}>网站地图</a>
+			/
+			<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://logs.poco.one/share/sHZL783bI5MICLST">Umami</a>
+			<br />
+			由
+			<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a>
+			和
+			<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
+			强力驱动
+		</div>
+
+		<div class="mt-5 flex flex-wrap justify-center gap-2">
+			<a href="https://www.cloudflare.com/" target="_blank" rel="noopener" aria-label="Hosted on Cloudflare">
+				<img src="/badges/hosted-cloudflare.svg" alt="Hosted on Cloudflare" class="h-5 w-auto" loading="lazy" />
+			</a>
+			<a href="https://www.cloudflare.com/" target="_blank" rel="noopener" aria-label="CDN provided by Cloudflare">
+				<img src="/badges/cdn-cloudflare.svg" alt="CDN provided by Cloudflare" class="h-5 w-auto" loading="lazy" />
+			</a>
+			<a href="https://icp.gov.moe/?keyword=20251824" target="_blank" rel="noopener" aria-label="ICP 20251824">
+				<img src="/badges/icp-20251824.svg" alt="ICP 20251824" class="h-5 w-auto" loading="lazy" />
+			</a>
+		</div>
+	</div>
 </div>

@@ -4,6 +4,8 @@ import { profileConfig } from "../../config";
 import ImageWrapper from "../misc/ImageWrapper.astro";
 
 const config = profileConfig;
+const umamiBaseUrl = "https://logs.poco.one";
+const umamiShareId = "sHZL783bI5MICLST";
 
 const quotes = [
 	"站在风口上，猪都能飞起来。",
@@ -47,6 +49,22 @@ const quotes = [
         <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">{config.name}</div>
         <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
         <div id="quote-container" class="text-center text-neutral-400 mb-2.5 transition text-sm min-h-[3rem]" data-quotes={JSON.stringify(quotes)}></div>
+        <div
+            id="umami-stats"
+            class="text-center text-neutral-500 mb-2.5 transition text-base font-semibold flex items-center justify-center gap-5"
+            data-umami-base-url={umamiBaseUrl}
+            data-umami-share-id={umamiShareId}
+        >
+            <span class="inline-flex items-center gap-2" title="Visitors">
+                <Icon name="material-symbols:group" class="text-[1.75rem]" />
+                <span id="umami-visitors">--</span>
+            </span>
+            <span class="opacity-40">|</span>
+            <span class="inline-flex items-center gap-2" title="Pageviews">
+                <Icon name="material-symbols:bar-chart" class="text-[1.75rem]" />
+                <span id="umami-pageviews">--</span>
+            </span>
+        </div>
         <div class="flex flex-wrap gap-2 justify-center mb-1">
             {config.links.length > 1 && config.links.map(item =>
                     <a rel="me" aria-label={item.name} href={item.url} target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90">
@@ -83,6 +101,51 @@ function initQuotes() {
 }
 initQuotes();
 document.addEventListener('astro:after-swap', initQuotes);
+
+async function initUmamiStats() {
+	const wrap = document.getElementById('umami-stats');
+	const elVisitors = document.getElementById('umami-visitors');
+	const elPageviews = document.getElementById('umami-pageviews');
+	if (!wrap || !elVisitors || !elPageviews) return;
+
+	try {
+		const baseUrl = wrap.dataset.umamiBaseUrl || '';
+		const shareId = wrap.dataset.umamiShareId || '';
+		if (!baseUrl || !shareId) return;
+
+		const endAt = Date.now();
+		const startAt = 0;
+		const base = baseUrl.replace(/\/+$/, '');
+
+		// Step 1: get share token + websiteId
+		const shareRes = await fetch(`${base}/api/share/${shareId}`, { credentials: 'omit' });
+		if (!shareRes.ok) return;
+		const share = await shareRes.json();
+		const websiteId = share?.websiteId;
+		const token = share?.token;
+		if (!websiteId || !token) return;
+
+		// Step 2: fetch stats using the share token header
+		const apiUrl = `${base}/api/websites/${websiteId}/stats?startAt=${startAt}&endAt=${endAt}`;
+
+		const res = await fetch(apiUrl, {
+			credentials: 'omit',
+			headers: {
+				Accept: 'application/json',
+				'x-umami-share-token': token,
+			},
+		});
+		if (!res.ok) return;
+		const data = await res.json();
+
+		const visitors = typeof data?.visitors === 'number' ? data.visitors : data?.visitors?.value;
+		const pageviews = typeof data?.pageviews === 'number' ? data.pageviews : data?.pageviews?.value;
+		if (typeof visitors === 'number') elVisitors.textContent = String(visitors);
+		if (typeof pageviews === 'number') elPageviews.textContent = String(pageviews);
+	} catch {}
+}
+initUmamiStats();
+document.addEventListener('astro:after-swap', initUmamiStats);
 </script>
 
 <style>

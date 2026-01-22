@@ -1,4 +1,5 @@
 <script lang="ts">
+import Icon from "@iconify/svelte";
 import { onMount } from "svelte";
 
 import I18nKey from "../i18n/i18nKey";
@@ -129,7 +130,7 @@ onMount(async () => {
 
                         <!-- post title -->
                         <div
-                                class="w-[70%] md:max-w-[65%] md:w-[65%] text-left font-bold
+                                class="w-[70%] md:max-w-[55%] md:w-[55%] text-left font-bold
                      group-hover:translate-x-1 transition-all group-hover:text-[var(--primary)]
                      text-75 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden"
                         >
@@ -142,6 +143,22 @@ onMount(async () => {
                      whitespace-nowrap overflow-ellipsis overflow-hidden text-30"
                         >
                             {formatTag(post.data.tags)}
+                        </div>
+
+                        <!-- stats -->
+                        <div
+                                class="hidden md:flex md:w-[10%] justify-end items-center gap-2 text-neutral-500 dark:text-neutral-400 font-semibold"
+                                data-umami-path={getPostUrlBySlug(post.slug)}
+                        >
+                            <span class="inline-flex items-center gap-1" title="Visitors">
+                                <Icon icon="material-symbols:group" class="text-[1.1rem]" />
+                                <span data-umami-visitors>--</span>
+                            </span>
+                            <span class="opacity-40">|</span>
+                            <span class="inline-flex items-center gap-1" title="Pageviews">
+                                <Icon icon="material-symbols:bar-chart" class="text-[1.1rem]" />
+                                <span data-umami-pageviews>--</span>
+                            </span>
                         </div>
                     </div>
                 </a>

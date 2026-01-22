@@ -10,8 +10,18 @@ import { LinkPreset } from "./types/config";
 export const siteConfig: SiteConfig = {
 	title: "MOEHANS BLOG",
 	subtitle: "Share AI, Serverless, and Cloud Native",
-	description: "Notes, analysis, and tutorials on AI, Serverless, and Cloud Native.",
-	keywords: ["AI", "Serverless", "Cloud Native", "Cloudflare", "Python", "React", "Tutorials", "Blog"],
+	description:
+		"Notes, analysis, and tutorials on AI, Serverless, and Cloud Native.",
+	keywords: [
+		"AI",
+		"Serverless",
+		"Cloud Native",
+		"Cloudflare",
+		"Python",
+		"React",
+		"Tutorials",
+		"Blog",
+	],
 	lang: "zh_CN", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
 	themeColor: {
 		hex: "#ec4899", // Theme color (hex)
@@ -33,8 +43,8 @@ export const siteConfig: SiteConfig = {
 	},
 	favicon: [
 		{
-			src: '/favicon.ico',
-		}
+			src: "/favicon.ico",
+		},
 	],
 };
 
@@ -48,8 +58,8 @@ export const navBarConfig: NavBarConfig = {
 			external: false,
 		},
 		{
-			name: "流量监控",
-			url: "https://screen.moehans.com/",
+			name: "Umami",
+			url: "https://logs.poco.one/share/sHZL783bI5MICLST",
 			external: true,
 		},
 	],
@@ -89,6 +99,3 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 	// Please select a dark theme, as this blog theme currently only supports dark background color
 	theme: "github-dark",
 };
-
-
-

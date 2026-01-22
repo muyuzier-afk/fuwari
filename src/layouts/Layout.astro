@@ -112,6 +112,188 @@ const bannerOffset =
 			/>
 		))}
 
+		<script defer src="https://logs.poco.one/script.js" data-website-id="672cf276-a7c1-4506-9de3-25d3fa7ddbbd"></script>
+		<script is:inline>
+			const umamiTrackPageView = () => {
+				const u = window.umami;
+				if (!u) return;
+				// Support both Umami v1/v2 APIs
+				if (typeof u.trackView === "function") {
+					u.trackView(window.location.pathname + window.location.search);
+				} else if (typeof u.track === "function") {
+					u.track();
+				}
+			};
+
+			const bindUmamiToSwup = () => {
+				if (!window?.swup?.hooks) return;
+				window.swup.hooks.on("page:view", umamiTrackPageView);
+			};
+
+			if (window.swup?.hooks) {
+				bindUmamiToSwup();
+			} else {
+				document.addEventListener("swup:enable", bindUmamiToSwup);
+			}
+		</script>
+		<script is:inline>
+			const UMAMI_BASE_URL = "https://logs.poco.one";
+			const UMAMI_SHARE_ID = "sHZL783bI5MICLST";
+			const UMAMI_SHARE_CACHE_KEY = `umami:share:${UMAMI_SHARE_ID}`;
+
+			const getUmamiShare = async () => {
+				try {
+					const cached = sessionStorage.getItem(UMAMI_SHARE_CACHE_KEY);
+					if (cached) {
+						const parsed = JSON.parse(cached);
+						if (parsed?.token && parsed?.websiteId) return parsed;
+					}
+				} catch {}
+
+				const res = await fetch(`${UMAMI_BASE_URL}/api/share/${UMAMI_SHARE_ID}`, {
+					credentials: "omit",
+					headers: { Accept: "application/json" },
+				});
+				if (!res.ok) throw new Error("Failed to fetch Umami share token");
+				const data = await res.json();
+				const payload = { token: data?.token, websiteId: data?.websiteId };
+				if (!payload.token || !payload.websiteId) {
+					throw new Error("Invalid Umami share response");
+				}
+				try {
+					sessionStorage.setItem(UMAMI_SHARE_CACHE_KEY, JSON.stringify(payload));
+				} catch {}
+				return payload;
+			};
+
+			const UMAMI_PATH_STATS_KEY = `umami:pathStats:${UMAMI_SHARE_ID}`;
+			const getUmamiPathStats = async () => {
+				const now = Date.now();
+				try {
+					const cached = sessionStorage.getItem(UMAMI_PATH_STATS_KEY);
+					if (cached) {
+						const parsed = JSON.parse(cached);
+						if (parsed?.ts && now - parsed.ts < 5 * 60 * 1000) return parsed;
+					}
+				} catch {}
+
+				const { token, websiteId } = await getUmamiShare();
+				const headers = {
+					Accept: "application/json",
+					"x-umami-share-token": token,
+				};
+				const startAt = 0;
+				const endAt = now;
+				const [metricsRes, valuesRes] = await Promise.all([
+					fetch(
+						`${UMAMI_BASE_URL}/api/websites/${websiteId}/metrics?startAt=${startAt}&endAt=${endAt}&type=path&pageSize=1000`,
+						{ credentials: "omit", headers },
+					),
+					fetch(
+						`${UMAMI_BASE_URL}/api/websites/${websiteId}/values?startAt=${startAt}&endAt=${endAt}&type=path&pageSize=1000`,
+						{ credentials: "omit", headers },
+					),
+				]);
+				if (!metricsRes.ok || !valuesRes.ok) {
+					throw new Error("Failed to fetch Umami path stats");
+				}
+
+				const metrics = await metricsRes.json();
+				const values = await valuesRes.json();
+
+				// metrics: [{ x: "/path/", y: 123 }] (visitors)
+				// values: [{ value: "/path/", count: 456 }] (pageviews)
+				const payload = {
+					ts: now,
+					visitors: Array.isArray(metrics) ? metrics : metrics?.value || [],
+					pageviews: Array.isArray(values) ? values : values?.value || [],
+				};
+
+				try {
+					sessionStorage.setItem(UMAMI_PATH_STATS_KEY, JSON.stringify(payload));
+				} catch {}
+
+				return payload;
+			};
+
+			const normalizePath = (p) => {
+				if (!p) return "/";
+				try {
+					if (p.startsWith("http")) return new URL(p).pathname || "/";
+				} catch {}
+				return p;
+			};
+
+			const updateUmamiPathStats = async () => {
+				const nodes = document.querySelectorAll("[data-umami-path]");
+				if (!nodes.length) return;
+
+				let stats;
+				try {
+					stats = await getUmamiPathStats();
+				} catch {
+					return;
+				}
+
+				const visitorsMap = new Map();
+				const pageviewsMap = new Map();
+				for (const row of stats.visitors || []) {
+					const key = normalizePath(row?.x ?? row?.value ?? row?.name);
+					const val = row?.y ?? row?.visitors;
+					if (
+						typeof key === "string" &&
+						(typeof val === "number" || typeof val === "string")
+					) {
+						visitorsMap.set(key, val);
+					}
+				}
+				for (const row of stats.pageviews || []) {
+					const key = normalizePath(row?.value ?? row?.x ?? row?.name);
+					const val = row?.count ?? row?.pageviews;
+					if (
+						typeof key === "string" &&
+						(typeof val === "number" || typeof val === "string")
+					) {
+						pageviewsMap.set(key, val);
+					}
+				}
+
+				for (const node of nodes) {
+					const rawPath = node.getAttribute("data-umami-path") || "";
+					const path = normalizePath(rawPath);
+					const elV = node.querySelector("[data-umami-visitors]");
+					const elP = node.querySelector("[data-umami-pageviews]");
+					if (elV) elV.textContent = String(visitorsMap.get(path) ?? 0);
+					if (elP) elP.textContent = String(pageviewsMap.get(path) ?? 0);
+				}
+			};
+
+			updateUmamiPathStats();
+			document.addEventListener("astro:after-swap", updateUmamiPathStats);
+
+			const bindUmamiPathStatsToSwup = () => {
+				if (!window?.swup?.hooks) return;
+				window.swup.hooks.on("page:view", updateUmamiPathStats);
+			};
+			if (window.swup?.hooks) {
+				bindUmamiPathStatsToSwup();
+			} else {
+				document.addEventListener("swup:enable", bindUmamiPathStatsToSwup);
+			}
+
+			// Support client-only rendered lists (e.g. Svelte archive page)
+			let umamiPathStatsObserverTimer;
+			const observeUmamiPathStats = () => {
+				if (typeof MutationObserver === "undefined") return;
+				const observer = new MutationObserver(() => {
+					clearTimeout(umamiPathStatsObserverTimer);
+					umamiPathStatsObserverTimer = setTimeout(updateUmamiPathStats, 50);
+				});
+				observer.observe(document.body, { childList: true, subtree: true });
+			};
+			observeUmamiPathStats();
+		</script>
+
 		<!-- Set the theme before the page is rendered to avoid a flash -->
 		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH, configHex}}>
 			// hex 转 hue
