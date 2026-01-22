@@ -32,7 +32,7 @@ Android 移动端界面:
 
 📥 下载与体验
 
-前往我们的[Github Release](https://github.com/muyuzier-afk/FuwariStudio)页面下载客户端或自行编译打包。
+前往我们的[Github](https://github.com/muyuzier-afk/FuwariStudio)页面下载客户端或自行编译打包。
 
 ---
 
