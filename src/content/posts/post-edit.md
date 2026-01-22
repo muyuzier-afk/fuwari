@@ -1,5 +1,5 @@
 ---
-title: FuwariStudio v0.2.1正式发布
+title: FuwariStudio v0.3正式发布
 published: 2026-01-22
 description: 闲的没事Vibe的文章编辑器.......适用于Astro Fuwari
 image: 屏幕截图 2026-01-22 061304_1769033652325.png
@@ -25,11 +25,8 @@ Android 移动端界面:
 特性:
 
 · 跨平台支持：基于 Flutter 框架，兼容 Android 8 Later 与 Windows 10 Later
-
 · 简洁交互：界面直观，降低学习成本
-
 · 高效编辑：流畅的 Markdown 支持与实时预览
-
 · 定制化字体：默认集成 MiSans Bold
 
 📥 下载与体验
