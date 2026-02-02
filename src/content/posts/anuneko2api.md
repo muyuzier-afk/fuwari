@@ -2,7 +2,7 @@
 title: 使用Zeabur部署Anuneko2API
 published: 2025-12-28
 description: 手把手教你将 Anuneko AI 转换为 OpenAI 兼容 API
-image: ../assets/images/anuneko2api/屏幕截图 2025-12-28 170942.png
+image: ''
 tags:
   - AI
   - LLM
@@ -11,6 +11,7 @@ tags:
   - Zeabur
 category: 教程
 draft: false
+lang: ''
 ---
 
 小东西怪可爱的，逆个向玩玩～
