@@ -2,7 +2,7 @@
 title: FuwariStudio v1.0正式发布
 published: 2026-01-22
 description: 闲的没事Vibe的文章编辑器.......适用于Astro Fuwari
-image: JPEG_20260123_035535_1560578054863014809_1769111738084.jpg
+image: ''
 tags:
   - 分享
   - FuwariStudio
