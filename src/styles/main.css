@@ -174,16 +174,12 @@
     }
 
     .profile-card__avatar-wrap {
-        @apply overflow-hidden rounded-[2rem] p-1.5;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(15, 23, 42, 0.06);
+        @apply overflow-hidden rounded-[1.6rem];
+        border-radius: 1.6rem;
     }
     .profile-card__avatar {
-        @apply h-[14rem] w-full overflow-hidden rounded-[1.6rem];
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(255, 255, 255, 0.04);
+        @apply relative h-[14rem] w-full overflow-hidden;
+        border-radius: inherit;
     }
     .profile-card__avatar picture {
         width: 100%;
@@ -200,10 +196,6 @@
         object-fit: contain !important;
         object-position: center !important;
         border-radius: inherit;
-    }
-    :root.dark .profile-card__avatar-wrap {
-        background: rgba(255, 255, 255, 0.04);
-        border-color: rgba(255, 255, 255, 0.08);
     }
     .profile-card__bio {
         min-height: 5.5rem;
