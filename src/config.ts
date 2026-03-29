@@ -59,7 +59,7 @@ export const navBarConfig: NavBarConfig = {
 		},
 		{
 			name: "Umami",
-			url: "https://logs.poco.one/share/sHZL783bI5MICLST",
+			url: "https://umami.moehans.com/share/b1DTwCvclcjiEE5E",
 			external: true,
 		},
 	],
