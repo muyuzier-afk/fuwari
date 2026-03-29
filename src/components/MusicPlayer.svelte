@@ -185,12 +185,11 @@ onDestroy(() => {
 	<div class="music-player-anchor fixed bottom-4 right-4 z-[70]">
 		{#if isOpen}
 			<section class="music-player-panel card-base">
-				<div class="music-player-panel__glow"></div>
-				<div class="relative z-10 flex flex-col gap-4">
+				<div class="flex flex-col gap-4">
 					<div class="flex items-center justify-between gap-4">
 						<div>
-							<div class="text-[0.7rem] font-semibold uppercase tracking-[0.24em] text-black/45 dark:text-white/45">{musicPlayerConfig.title || "Playlist"}</div>
-							<div class="text-sm font-semibold text-black/85 dark:text-white/85">Local floating player</div>
+							<div class="text-sm font-semibold text-black/85 dark:text-white/85">{musicPlayerConfig.title || "Playlist"}</div>
+							<div class="mt-1 text-xs text-black/45 dark:text-white/45">本地歌单</div>
 						</div>
 						<div class="flex items-center gap-2">
 							<button class="music-icon-btn" on:click={() => (showPlaylist = !showPlaylist)} aria-label="Toggle playlist">
@@ -203,9 +202,8 @@ onDestroy(() => {
 					</div>
 
 					<div class="grid gap-4 md:grid-cols-[5.2rem_minmax(0,1fr)] md:items-center">
-						<div class:list={["music-cover-wrap", { "music-cover-wrap--playing": isPlaying }]}>
+						<div class="music-cover-wrap">
 							<img src={currentTrack?.cover || "/acofork.jpg"} alt={currentTrack?.title || "Track cover"} class="music-cover" />
-							<div class="music-cover__pulse"></div>
 						</div>
 						<div class="min-w-0">
 							<div class="truncate text-base font-semibold text-black/90 dark:text-white/90">{currentTrack?.title}</div>
@@ -244,7 +242,7 @@ onDestroy(() => {
 						<div class="music-playlist">
 							{#each playlist as track, index}
 								<button class:music-playlist__item--active={index === currentIndex} class="music-playlist__item" on:click={() => choose(index)}>
-									<img src={track.cover || "/acofork.jpg"} alt="" class="h-10 w-10 rounded-xl object-cover" />
+									<img src={track.cover || "/acofork.jpg"} alt="" class="h-10 w-10 rounded-md object-cover" />
 									<span class="min-w-0 flex-1 text-left">
 										<span class="block truncate text-sm font-medium text-black/85 dark:text-white/85">{track.title}</span>
 										<span class="block truncate text-xs text-black/45 dark:text-white/45">{track.artist}</span>
@@ -260,7 +258,7 @@ onDestroy(() => {
 			</section>
 		{:else}
 			<button class="music-player-mini card-base" on:click={toggleOpen} aria-label="Open music player">
-				<img src={currentTrack?.cover || "/acofork.jpg"} alt="" class="h-11 w-11 rounded-2xl object-cover" />
+				<img src={currentTrack?.cover || "/acofork.jpg"} alt="" class="h-11 w-11 rounded-md object-cover" />
 				<span class="min-w-0 flex-1 text-left">
 					<span class="block truncate text-sm font-semibold text-black/85 dark:text-white/85">{currentTrack?.title}</span>
 					<span class="block truncate text-xs text-black/45 dark:text-white/45">{currentTrack?.artist}</span>
@@ -275,38 +273,26 @@ onDestroy(() => {
 
 <style>
 	.music-player-anchor {
-		width: min(22rem, calc(100vw - 2rem));
+		width: min(20rem, calc(100vw - 2rem));
 	}
 
 	.music-player-panel,
 	.music-player-mini {
-		position: relative;
 		border: 1px solid var(--card-border);
-		background: color-mix(in oklch, var(--card-bg) 88%, white 12%);
-		backdrop-filter: blur(20px);
-		-webkit-backdrop-filter: blur(20px);
-		box-shadow: var(--shadow-lg);
+		background: color-mix(in oklch, var(--card-bg) 94%, white 6%);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		box-shadow: var(--shadow-sm);
 	}
 
 	:global(.dark) .music-player-panel,
 	:global(.dark) .music-player-mini {
-		background: color-mix(in oklch, var(--card-bg) 94%, black 6%);
+		background: color-mix(in oklch, var(--card-bg) 96%, black 4%);
 	}
 
 	.music-player-panel {
-		padding: 1rem;
-		border-radius: 1.5rem;
-		overflow: hidden;
-	}
-
-	.music-player-panel__glow {
-		position: absolute;
-		inset: -30% auto auto -20%;
-		width: 12rem;
-		height: 12rem;
-		border-radius: 999px;
-		background: radial-gradient(circle, color-mix(in oklch, var(--primary) 26%, transparent) 0%, transparent 70%);
-		pointer-events: none;
+		padding: 0.9rem;
+		border-radius: 0.75rem;
 	}
 
 	.music-player-mini {
@@ -315,12 +301,7 @@ onDestroy(() => {
 		align-items: center;
 		gap: 0.875rem;
 		padding: 0.75rem;
-		border-radius: 1.5rem;
-		transition: transform 0.2s ease, box-shadow 0.2s ease;
-	}
-
-	.music-player-mini:hover {
-		transform: translateY(-2px);
+		border-radius: 0.75rem;
 	}
 
 	.music-mini-icon {
@@ -329,13 +310,12 @@ onDestroy(() => {
 		justify-content: center;
 		height: 2.5rem;
 		width: 2.5rem;
-		border-radius: 999px;
-		background: color-mix(in oklch, var(--primary) 18%, transparent);
+		border-radius: 0.5rem;
+		background: color-mix(in oklch, var(--primary) 12%, transparent);
 		color: var(--primary);
 	}
 
 	.music-cover-wrap {
-		position: relative;
 		height: 5.2rem;
 		width: 5.2rem;
 	}
@@ -343,35 +323,17 @@ onDestroy(() => {
 	.music-cover {
 		height: 100%;
 		width: 100%;
-		border-radius: 1.35rem;
+		border-radius: 0.6rem;
 		object-fit: cover;
-		position: relative;
-		z-index: 1;
-	}
-
-	.music-cover__pulse {
-		position: absolute;
-		inset: 0.4rem;
-		border-radius: 1.1rem;
-		background: color-mix(in oklch, var(--primary) 30%, transparent);
-		filter: blur(16px);
-		opacity: 0;
-		transform: scale(0.92);
-		transition: opacity 0.2s ease, transform 0.2s ease;
-		z-index: 0;
-	}
-
-	.music-cover-wrap--playing .music-cover__pulse {
-		opacity: 0.9;
-		transform: scale(1.03);
+		border: 1px solid rgba(255, 255, 255, 0.06);
 	}
 
 	.music-progress {
 		position: relative;
-		height: 0.45rem;
+		height: 0.35rem;
 		width: 100%;
 		border-radius: 999px;
-		background: color-mix(in oklch, var(--primary) 14%, transparent);
+		background: rgba(255, 255, 255, 0.08);
 		overflow: hidden;
 	}
 
@@ -379,7 +341,7 @@ onDestroy(() => {
 		display: block;
 		height: 100%;
 		border-radius: inherit;
-		background: linear-gradient(90deg, color-mix(in oklch, var(--primary) 72%, white 18%) 0%, var(--primary) 100%);
+		background: var(--primary);
 	}
 
 	.music-icon-btn,
@@ -387,28 +349,22 @@ onDestroy(() => {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		border-radius: 999px;
-		transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+		border-radius: 0.5rem;
+		transition: background 0.2s ease, color 0.2s ease;
 	}
 
 	.music-icon-btn {
 		height: 2.6rem;
 		width: 2.6rem;
-		background: color-mix(in oklch, var(--primary) 10%, transparent);
+		background: color-mix(in oklch, var(--primary) 8%, transparent);
 		color: color-mix(in oklch, var(--primary) 80%, white 5%);
 	}
 
 	.music-play-btn {
-		height: 3rem;
-		width: 3rem;
+		height: 2.75rem;
+		width: 2.75rem;
 		background: var(--primary);
 		color: white;
-		box-shadow: 0 12px 30px color-mix(in oklch, var(--primary) 40%, transparent);
-	}
-
-	.music-icon-btn:hover,
-	.music-play-btn:hover {
-		transform: translateY(-1px);
 	}
 
 	.music-volume {
@@ -416,7 +372,7 @@ onDestroy(() => {
 		align-items: center;
 		gap: 0.6rem;
 		padding: 0.55rem 0.8rem;
-		border-radius: 999px;
+		border-radius: 0.5rem;
 		background: color-mix(in oklch, var(--primary) 8%, transparent);
 	}
 
@@ -438,18 +394,14 @@ onDestroy(() => {
 		align-items: center;
 		gap: 0.75rem;
 		padding: 0.55rem;
-		border-radius: 1rem;
+		border-radius: 0.5rem;
 		background: transparent;
-		transition: background 0.2s ease, transform 0.2s ease;
+		transition: background 0.2s ease;
 	}
 
 	.music-playlist__item:hover,
 	.music-playlist__item--active {
 		background: color-mix(in oklch, var(--primary) 10%, transparent);
-	}
-
-	.music-playlist__item:hover {
-		transform: translateX(2px);
 	}
 
 	@media (max-width: 640px) {
@@ -460,8 +412,7 @@ onDestroy(() => {
 		}
 
 		.music-player-panel {
-			padding: 0.9rem;
-			border-radius: 1.3rem;
+			padding: 0.85rem;
 		}
 
 		.music-volume input {

@@ -13,8 +13,7 @@ const sortedPostsList = await getSortedPostsList();
     <div class="mb-4">
         <PageHeader
             title="归档"
-            subtitle="按时间回看这段站点的内容输出。这里保留了筛选能力，也补上了更明确的页面头部和层级。"
-            eyebrow="Archive"
+            subtitle="按时间整理的文章列表。"
         />
     </div>
     <ArchivePanel sortedPosts={sortedPostsList} client:only="svelte"></ArchivePanel>

@@ -44,31 +44,9 @@ export const siteConfig: SiteConfig = {
 		},
 	},
 	hero: {
-		enable: true,
-		badge: "Mizuki Inspired Refresh",
-		title: "Cloud-native notes with a softer surface.",
-		description:
-			"围绕 AI、Serverless 与 Cloud Native 的实践、拆解和长期记录，保留 Fuwari 的轻量结构，但把首页氛围、卡片层次和页面编排做得更完整。",
-		rotatingLines: [
-			"写给正在折腾边缘计算、自动化和个人基础设施的人。",
-			"把教程、经验和零碎观察收拢成可复用的知识库。",
-			"让技术博客看起来更像一个有情绪的工作台。",
-		],
-		stats: [
-			{ value: "AI", label: "Focus" },
-			{ value: "Edge", label: "Runtime" },
-			{ value: "Notes", label: "Archive" },
-		],
-		actions: [
-			{ label: "浏览文章", url: "/" },
-			{ label: "友情链接", url: "/friends/", style: "ghost" },
-			{
-				label: "访问统计",
-				url: "https://umami.moehans.com/share/b1DTwCvclcjiEE5E",
-				external: true,
-				style: "ghost",
-			},
-		],
+		enable: false,
+		title: "",
+		description: "",
 	},
 	postListLayout: {
 		categoryBar: {
@@ -107,9 +85,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/head.gif",
 	name: "MOEHANS",
-	status: "Now building a calmer, brighter Fuwari fork.",
-	location: "Shanghai / Edge-first web",
-	bio: "记录 AI、Serverless 与 Cloud Native，也顺手打磨这个站点本身的体验和质感。",
+	bio: "AI / Serverless / Cloud Native",
 	links: [
 		{
 			name: "GitHub",

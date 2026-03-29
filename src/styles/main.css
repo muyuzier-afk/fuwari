@@ -13,11 +13,10 @@
         background-color: rgba(35, 35, 40, 0.8);
     }
     .card-hover:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
+        box-shadow: var(--shadow-sm);
     }
     .card-hover:active {
-        transform: translateY(-1px);
+        transform: none;
     }
     h1, h2, h3, h4, h5, h6, p, a, span, li, ul, ol, blockquote, code, pre, table, th, td, strong {
         @apply transition;
@@ -36,12 +35,10 @@
         @apply transition rounded-md p-1.5 -m-1.5 expand-animation;
     }
     .float-panel {
-        @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden transition;
+        @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden transition shadow-xl dark:shadow-none;
         background-color: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--card-border);
-        box-shadow: var(--shadow-lg);
     }
     :root.dark .float-panel {
         background-color: rgba(30, 30, 35, 0.8);
@@ -135,75 +132,25 @@
     }
 
     .navbar-shell {
-        @apply rounded-b-[1.5rem] border border-white/10;
-        background: color-mix(in oklch, var(--card-bg) 88%, white 12%);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-        box-shadow: var(--shadow-lg);
+        @apply border border-white/10 rounded-none;
+        background: rgba(255, 255, 255, 0.72);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        box-shadow: var(--shadow-sm);
     }
     :root.dark .navbar-shell {
-        background: color-mix(in oklch, var(--card-bg) 94%, black 6%);
+        background: rgba(28, 28, 34, 0.86);
     }
     .enable-banner #navbar[data-is-home="true"]:not(.scrolled) .navbar-shell {
-        background: rgba(255, 255, 255, 0.38);
-        border-color: rgba(255, 255, 255, 0.18);
         box-shadow: none;
-    }
-    :root.dark .enable-banner #navbar[data-is-home="true"]:not(.scrolled) .navbar-shell {
-        background: rgba(17, 17, 20, 0.3);
-        border-color: rgba(255, 255, 255, 0.1);
-    }
-    .navbar-brand::after {
-        content: "";
-        position: absolute;
-        inset: auto 0.875rem 0.55rem;
-        height: 1px;
-        border-radius: 999px;
-        background: linear-gradient(90deg, color-mix(in oklch, var(--primary) 0%, transparent) 0%, color-mix(in oklch, var(--primary) 55%, transparent) 50%, color-mix(in oklch, var(--primary) 0%, transparent) 100%);
-        opacity: 0;
-        transform: scaleX(0.6);
-        transition: opacity 0.2s ease, transform 0.2s ease;
-    }
-    .navbar-brand:hover::after {
-        opacity: 1;
-        transform: scaleX(1);
     }
 
     .page-header {
         border: 1px solid var(--card-border);
     }
-    .page-header-glow,
-    .hero-card__glow,
-    .footer-card__glow,
-    .friend-page-glow {
-        position: absolute;
-        inset: -20% auto auto -8%;
-        width: 14rem;
-        height: 14rem;
-        border-radius: 999px;
-        pointer-events: none;
-        background: radial-gradient(circle, color-mix(in oklch, var(--primary) 24%, transparent) 0%, transparent 72%);
-    }
-    .hero-card {
-        border: 1px solid var(--card-border);
-        background:
-            linear-gradient(135deg, color-mix(in oklch, var(--primary) 6%, transparent) 0%, transparent 48%),
-            linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.74) 100%);
-    }
-    :root.dark .hero-card {
-        background:
-            linear-gradient(135deg, color-mix(in oklch, var(--primary) 12%, transparent) 0%, transparent 48%),
-            linear-gradient(180deg, rgba(28, 28, 34, 0.92) 0%, rgba(24, 24, 30, 0.9) 100%);
-    }
-    .hero-card__grid {
-        min-height: 20rem;
-    }
-    #hero-rotating-line {
-        @apply transition-all duration-200;
-    }
 
     .category-pill {
-        @apply inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium transition;
+        @apply inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition;
         background: rgba(255, 255, 255, 0.55);
         color: rgba(15, 23, 42, 0.78);
         border: 1px solid rgba(15, 23, 42, 0.08);
@@ -218,79 +165,40 @@
         color: white;
         background: var(--primary);
         border-color: transparent;
-        box-shadow: 0 12px 32px color-mix(in oklch, var(--primary) 30%, transparent);
     }
     .category-pill__count {
-        @apply inline-flex items-center justify-center rounded-full text-[0.72rem] font-semibold;
+        @apply inline-flex items-center justify-center rounded-md text-[0.72rem] font-semibold;
         min-width: 1.5rem;
         height: 1.5rem;
         background: rgba(255, 255, 255, 0.15);
     }
 
-    .profile-card__top {
-        @apply p-3;
+    .profile-card__avatar-wrap {
+        @apply overflow-hidden rounded-md;
     }
-    .profile-card__cover {
-        @apply relative mb-4 block h-[14rem] overflow-hidden rounded-[1.35rem];
-    }
-    .profile-card__cover-overlay {
-        @apply absolute inset-0 z-10 flex items-center justify-center bg-black/10 transition;
-    }
-    .profile-card__cover:hover .profile-card__cover-overlay {
-        @apply bg-black/35;
-    }
-    .profile-card__identity {
-        @apply px-1;
-    }
-    .profile-card__status-row {
-        @apply flex flex-wrap gap-2;
-    }
-    .profile-card__status,
-    .profile-card__location {
-        @apply rounded-full px-3 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.22em];
-        background: rgba(255, 255, 255, 0.5);
-        color: rgba(15, 23, 42, 0.56);
-        border: 1px solid rgba(15, 23, 42, 0.08);
-    }
-    :root.dark .profile-card__status,
-    :root.dark .profile-card__location {
-        background: rgba(255, 255, 255, 0.06);
-        color: rgba(255, 255, 255, 0.58);
-        border-color: rgba(255, 255, 255, 0.08);
-    }
-    .profile-card__stats {
-        @apply grid grid-cols-3 gap-3 px-4 pb-4;
-    }
-    .profile-card__stat-item {
-        @apply rounded-2xl px-3 py-3 text-center;
-        background: rgba(255, 255, 255, 0.48);
-        border: 1px solid rgba(15, 23, 42, 0.06);
-    }
-    :root.dark .profile-card__stat-item {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.06);
+    .profile-card__avatar {
+        @apply h-[14rem] w-full;
     }
     .profile-card__links {
-        @apply grid grid-cols-1 gap-2 px-4 pb-4;
+        @apply grid grid-cols-3 gap-2;
     }
-    .profile-card__link {
-        @apply flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium transition;
+    .profile-card__icon-link {
+        @apply flex h-10 items-center justify-center rounded-md transition;
         background: rgba(255, 255, 255, 0.45);
         color: rgba(15, 23, 42, 0.76);
         border: 1px solid rgba(15, 23, 42, 0.06);
     }
-    :root.dark .profile-card__link {
+    :root.dark .profile-card__icon-link {
         background: rgba(255, 255, 255, 0.04);
         color: rgba(255, 255, 255, 0.76);
         border-color: rgba(255, 255, 255, 0.06);
     }
-    .profile-card__link:hover {
-        transform: translateX(2px);
+    .profile-card__icon-link:hover {
         color: var(--primary);
     }
 
     .post-card__tag {
-        @apply inline-flex items-center rounded-full px-3 py-1.5 text-xs font-semibold tracking-[0.08em] transition;
+        @apply inline-flex items-center rounded-md px-3 py-1.5 text-xs font-semibold tracking-[0.08em] transition;
         background: rgba(255, 255, 255, 0.5);
         color: rgba(15, 23, 42, 0.62);
         border: 1px solid rgba(15, 23, 42, 0.08);
@@ -308,7 +216,7 @@
         @apply pointer-events-none;
     }
     .post-card__meta-strip {
-        @apply inline-flex w-fit items-center gap-3 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-black/45 dark:text-white/45;
+        @apply inline-flex w-fit items-center gap-3 rounded-md px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-black/45 dark:text-white/45;
         background: rgba(255, 255, 255, 0.42);
         border: 1px solid rgba(15, 23, 42, 0.06);
     }
@@ -347,18 +255,18 @@
         background: rgba(255, 255, 255, 0.28);
     }
     .friend-search-input {
-        @apply h-12 w-full rounded-2xl border border-black/10 bg-white/55 pl-12 pr-4 text-sm outline-none transition;
+        @apply h-11 w-full rounded-md border border-black/10 bg-white/55 pl-12 pr-4 text-sm outline-none transition;
     }
     .friend-search-input:focus {
         border-color: color-mix(in oklch, var(--primary) 40%, transparent);
-        box-shadow: 0 0 0 4px color-mix(in oklch, var(--primary) 12%, transparent);
+        box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 12%, transparent);
     }
     :root.dark .friend-search-input {
         background: rgba(255, 255, 255, 0.05);
         border-color: rgba(255, 255, 255, 0.08);
     }
     .friend-filter {
-        @apply h-11 rounded-full px-4 text-sm font-semibold transition;
+        @apply h-10 rounded-md px-4 text-sm font-semibold transition;
         background: rgba(255, 255, 255, 0.5);
         color: rgba(15, 23, 42, 0.62);
         border: 1px solid rgba(15, 23, 42, 0.08);
@@ -381,8 +289,7 @@
         @apply flex-shrink-0;
     }
     .friend-card__logo {
-        @apply relative h-14 w-14 overflow-hidden rounded-2xl;
-        background: linear-gradient(135deg, color-mix(in oklch, var(--primary) 18%, transparent) 0%, transparent 100%);
+        @apply relative h-14 w-14 overflow-hidden rounded-md bg-white/20 dark:bg-white/5;
         border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .friend-card__logo--svg {
@@ -393,7 +300,7 @@
     }
     .friend-type-pill,
     .friend-tag {
-        @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold;
+        @apply inline-flex items-center rounded-md px-3 py-1 text-xs font-semibold;
     }
     .friend-type-pill {
         background: color-mix(in oklch, var(--primary) 18%, transparent);
@@ -408,16 +315,16 @@
         color: rgba(255, 255, 255, 0.56);
     }
     .friend-apply-card {
-        @apply rounded-[1.5rem] p-5 md:p-6;
-        background: linear-gradient(135deg, color-mix(in oklch, var(--primary) 8%, transparent) 0%, rgba(255, 255, 255, 0.38) 100%);
+        @apply rounded-md p-5 md:p-6;
+        background: rgba(255, 255, 255, 0.35);
         border: 1px solid rgba(15, 23, 42, 0.08);
     }
     :root.dark .friend-apply-card {
-        background: linear-gradient(135deg, color-mix(in oklch, var(--primary) 12%, transparent) 0%, rgba(255, 255, 255, 0.03) 100%);
+        background: rgba(255, 255, 255, 0.03);
         border-color: rgba(255, 255, 255, 0.08);
     }
     .friend-apply-item {
-        @apply rounded-2xl px-4 py-4;
+        @apply rounded-md px-4 py-4;
         background: rgba(255, 255, 255, 0.48);
         border: 1px solid rgba(15, 23, 42, 0.06);
     }
@@ -436,7 +343,7 @@
         border: 1px solid var(--card-border);
     }
     .footer-link {
-        @apply rounded-full px-3 py-1.5 transition;
+        @apply rounded-md px-3 py-1.5 transition;
         background: rgba(255, 255, 255, 0.45);
     }
     :root.dark .footer-link {
@@ -452,25 +359,6 @@ body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background:
-        radial-gradient(circle at top, color-mix(in oklch, var(--primary) 12%, transparent) 0%, transparent 36%),
-        transparent;
-}
-
-.top-gradient-highlight {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 180px;
-    background: linear-gradient(
-        to bottom,
-        color-mix(in oklch, var(--primary) 16%, transparent) 0%,
-        transparent 100%
-    );
-    pointer-events: none;
-    z-index: 20;
-    transition: opacity 0.3s ease;
 }
 
 .custom-md img, #post-cover img {

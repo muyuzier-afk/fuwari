@@ -68,14 +68,12 @@ const filterTags = ["全部", "博客", "社区", "论坛", "技术", "VPS"];
 	<div class="mb-4">
 		<PageHeader
 			title="友链"
-			subtitle="保留友情链接本身，也把这一页做成更完整的专题入口。可以直接搜索、筛选，再从这里跳到你想看的站点。"
-			eyebrow="Friends"
+			subtitle="友情链接与常用社区。"
 		/>
 	</div>
 
-	<div class="card-base relative w-full overflow-hidden px-6 py-6 md:px-8">
-		<div class="friend-page-glow"></div>
-		<div class="relative z-10 space-y-6">
+	<div class="card-base w-full px-6 py-6 md:px-8">
+		<div class="space-y-6">
 			<div class="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
 				<label class="friend-search-wrap">
 					<span class="sr-only">搜索友链</span>
@@ -126,15 +124,14 @@ const filterTags = ["全部", "博客", "社区", "论坛", "技术", "VPS"];
 				))}
 			</div>
 
-			<div id="friend-empty" class="hidden rounded-2xl border border-dashed border-black/10 px-6 py-10 text-center text-sm text-black/45 dark:border-white/10 dark:text-white/45">
+			<div id="friend-empty" class="hidden rounded-md border border-dashed border-black/10 px-6 py-10 text-center text-sm text-black/45 dark:border-white/10 dark:text-white/45">
 				没有匹配结果，试试更短的关键词或者切换筛选标签。
 			</div>
 
 			<div class="friend-apply-card">
 				<div>
-					<div class="text-xs font-semibold uppercase tracking-[0.2em] text-black/45 dark:text-white/45">Apply</div>
-					<h2 class="mt-2 text-xl font-semibold text-black/90 dark:text-white/90">申请友链</h2>
-					<p class="mt-2 text-sm leading-7 text-black/60 dark:text-white/60">请提供网站名称、描述、链接和图标。站点内容长期可访问、设计完整、更新稳定，会更容易通过。</p>
+					<h2 class="text-xl font-semibold text-black/90 dark:text-white/90">申请友链</h2>
+					<p class="mt-2 text-sm leading-7 text-black/60 dark:text-white/60">提供名称、描述、链接和图标即可。</p>
 				</div>
 				<div class="grid gap-3 sm:grid-cols-2">
 					<div class="friend-apply-item">

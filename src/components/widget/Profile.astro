@@ -1,61 +1,23 @@
 ---
 import { Icon } from "astro-icon/components";
 import { profileConfig, siteConfig } from "../../config";
-import {
-	getCategoryList,
-	getSortedPostsList,
-	getTagList,
-} from "../../utils/content-utils";
-import { url } from "../../utils/url-utils";
 import ImageWrapper from "../misc/ImageWrapper.astro";
 
 const config = profileConfig;
-const [posts, tags, categories] = await Promise.all([
-	getSortedPostsList(),
-	getTagList(),
-	getCategoryList(),
-]);
-
-const profileStats = [
-	{ label: "Posts", value: String(posts.length) },
-	{ label: "Tags", value: String(tags.length) },
-	{ label: "Cats", value: String(categories.length) },
-];
 ---
 
-<div class="profile-card card-base overflow-hidden">
-	<div class="profile-card__top">
-		<a href={url("/about/")} class="profile-card__cover group" aria-label="About MOEHANS">
-			<div class="profile-card__cover-overlay">
-				<Icon name="fa6-regular:address-card" class="text-4xl text-white opacity-0 transition group-hover:opacity-100" />
-			</div>
-			<ImageWrapper src={config.avatar || ""} alt="Profile Image of the Author" class="h-full w-full" />
-		</a>
-		<div class="profile-card__identity">
-			<div class="profile-card__status-row">
-				{config.status && <span class="profile-card__status">{config.status}</span>}
-				{config.location && <span class="profile-card__location">{config.location}</span>}
-			</div>
-			<div class="mt-3 text-2xl font-bold text-black/90 dark:text-white/90">{config.name}</div>
-			<div class="mt-2 h-1 w-12 rounded-full bg-[var(--primary)]"></div>
-			<p class="mt-4 text-sm leading-7 text-black/60 dark:text-white/60">{config.bio || siteConfig.subtitle}</p>
-		</div>
+<div class="profile-card card-base p-4">
+	<div class="profile-card__avatar-wrap">
+		<ImageWrapper src={config.avatar || ""} alt="Profile Image of the Author" class="profile-card__avatar" />
 	</div>
-
-	<div class="profile-card__stats">
-		{profileStats.map((item) => (
-			<div class="profile-card__stat-item">
-				<div class="text-lg font-bold tracking-[-0.04em] text-black/90 dark:text-white/90">{item.value}</div>
-				<div class="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-black/45 dark:text-white/45">{item.label}</div>
-			</div>
-		))}
+	<div class="mt-4 text-center">
+		<div class="text-xl font-bold text-black/90 dark:text-white/90">{config.name}</div>
+		<p class="mt-2 text-sm text-black/55 dark:text-white/55">{config.bio || siteConfig.subtitle}</p>
 	</div>
-
-	<div class="profile-card__links">
-		{config.links.map((item) => (
-			<a rel="me" aria-label={item.name} href={item.url} target="_blank" class="profile-card__link">
-				<Icon name={item.icon} class="text-[1.15rem]" />
-				<span>{item.name}</span>
+	<div class="profile-card__links mt-4">
+		{config.links.slice(0, 3).map((item) => (
+			<a rel="me" aria-label={item.name} href={item.url} target="_blank" class="profile-card__icon-link">
+				<Icon name={item.icon} class="text-[1.25rem]" />
 			</a>
 		))}
 	</div>

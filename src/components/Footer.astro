@@ -1,43 +1,32 @@
 ---
-import { profileConfig, siteConfig } from "../config";
+import { profileConfig } from "../config";
 import { url } from "../utils/url-utils";
 
 const currentYear = new Date().getFullYear();
 ---
 
 <div class="mt-10 mb-12">
-	<div class="footer-card card-base relative overflow-hidden px-6 py-8 text-center">
-		<div class="footer-card__glow"></div>
-		<div class="relative z-10">
-			<div class="text-xs font-semibold uppercase tracking-[0.24em] text-black/40 dark:text-white/40">Footer</div>
-			<div class="mt-3 text-xl font-semibold text-black/90 dark:text-white/90">{profileConfig.name}</div>
-			<p class="mx-auto mt-3 max-w-2xl text-sm leading-7 text-black/55 dark:text-white/55">
-				{siteConfig.subtitle}
-			</p>
+	<div class="card-base px-6 py-6 text-center">
+		<div class="text-sm leading-7 text-black/50 dark:text-white/50">
+			&copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name}
+			<br />
+			<a class="footer-link" target="_blank" href={url("rss.xml")}>RSS</a>
+			/
+			<a class="footer-link" target="_blank" href={url("sitemap-index.xml")}>网站地图</a>
+			/
+			<a class="footer-link" target="_blank" href="https://umami.moehans.com/share/b1DTwCvclcjiEE5E">Umami</a>
+		</div>
 
-			<div class="mt-5 flex flex-wrap justify-center gap-2 text-sm font-medium text-black/60 dark:text-white/60">
-				<a class="footer-link" target="_blank" href={url("rss.xml")}>RSS</a>
-				<a class="footer-link" target="_blank" href={url("sitemap-index.xml")}>网站地图</a>
-				<a class="footer-link" target="_blank" href="https://umami.moehans.com/share/b1DTwCvclcjiEE5E">Umami</a>
-				<a class="footer-link" target="_blank" href="https://astro.build">Astro</a>
-				<a class="footer-link" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
-			</div>
-
-			<div class="mt-5 text-sm leading-7 text-black/45 dark:text-white/45">
-				&copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name} · CC BY-NC-SA 4.0
-			</div>
-
-			<div class="mt-5 flex flex-wrap justify-center gap-2">
-				<a href="https://www.cloudflare.com/" target="_blank" rel="noopener" aria-label="Hosted on Cloudflare">
-					<img src="/badges/hosted-cloudflare.svg" alt="Hosted on Cloudflare" class="h-5 w-auto" loading="lazy" />
-				</a>
-				<a href="https://www.cloudflare.com/" target="_blank" rel="noopener" aria-label="CDN provided by Cloudflare">
-					<img src="/badges/cdn-cloudflare.svg" alt="CDN provided by Cloudflare" class="h-5 w-auto" loading="lazy" />
-				</a>
-				<a href="https://icp.gov.moe/?keyword=20251824" target="_blank" rel="noopener" aria-label="ICP 20251824">
-					<img src="/badges/icp-20251824.svg" alt="ICP 20251824" class="h-5 w-auto" loading="lazy" />
-				</a>
-			</div>
+		<div class="mt-4 flex flex-wrap justify-center gap-2">
+			<a href="https://www.cloudflare.com/" target="_blank" rel="noopener" aria-label="Hosted on Cloudflare">
+				<img src="/badges/hosted-cloudflare.svg" alt="Hosted on Cloudflare" class="h-5 w-auto" loading="lazy" />
+			</a>
+			<a href="https://www.cloudflare.com/" target="_blank" rel="noopener" aria-label="CDN provided by Cloudflare">
+				<img src="/badges/cdn-cloudflare.svg" alt="CDN provided by Cloudflare" class="h-5 w-auto" loading="lazy" />
+			</a>
+			<a href="https://icp.gov.moe/?keyword=20251824" target="_blank" rel="noopener" aria-label="ICP 20251824">
+				<img src="/badges/icp-20251824.svg" alt="ICP 20251824" class="h-5 w-auto" loading="lazy" />
+			</a>
 		</div>
 	</div>
 </div>
