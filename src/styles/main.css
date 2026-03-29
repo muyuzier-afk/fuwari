@@ -206,10 +206,10 @@
         opacity: 0.72;
     }
     .profile-card__links {
-        @apply grid grid-cols-3 gap-1.5;
+        @apply flex items-center justify-center gap-1;
     }
     .profile-card__icon-link {
-        @apply flex h-9 items-center justify-center rounded-md transition;
+        @apply inline-flex h-8 w-8 items-center justify-center rounded-md transition;
         background: rgba(255, 255, 255, 0.45);
         color: rgba(15, 23, 42, 0.76);
         border: 1px solid rgba(15, 23, 42, 0.06);
