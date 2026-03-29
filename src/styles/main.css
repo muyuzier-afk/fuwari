@@ -175,9 +175,21 @@
 
     .profile-card__avatar-wrap {
         @apply overflow-hidden rounded-md;
+        background: rgba(255, 255, 255, 0.06);
     }
     .profile-card__avatar {
         @apply h-[14rem] w-full;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .profile-card__avatar img,
+    .profile-card__avatar picture img {
+        object-fit: contain !important;
+        object-position: center !important;
+    }
+    :root.dark .profile-card__avatar-wrap {
+        background: rgba(255, 255, 255, 0.03);
     }
     .profile-card__links {
         @apply grid grid-cols-3 gap-2;

@@ -2,9 +2,9 @@
 import { musicPlayerConfig } from "@/config";
 import type { MusicTrack } from "@/types/config";
 import Icon from "@iconify/svelte";
-import { cubicOut } from "svelte/easing";
+import { cubicInOut, quintOut } from "svelte/easing";
 import { onDestroy, onMount } from "svelte";
-import { scale, slide } from "svelte/transition";
+import { fly, slide } from "svelte/transition";
 
 const storageKey = "moehans:music-player";
 const playlist = musicPlayerConfig.localPlaylist;
@@ -186,7 +186,7 @@ onDestroy(() => {
 {#if musicPlayerConfig.enable && playlist.length > 0 && hasMounted}
 	<div class="music-player-anchor fixed bottom-4 right-4 z-[70]">
 		{#if isOpen}
-			<section class="music-player-panel card-base" in:scale={{ start: 0.94, opacity: 0.35, duration: 180, easing: cubicOut }} out:scale={{ start: 0.98, opacity: 0.4, duration: 150 }}>
+			<section class="music-player-panel card-base" in:fly={{ y: 12, opacity: 0.18, duration: 220, easing: quintOut }} out:fly={{ y: 10, opacity: 0.12, duration: 180, easing: cubicInOut }}>
 				<div class="flex flex-col gap-4">
 					<div class="flex items-center justify-between gap-4">
 						<div>
@@ -241,7 +241,7 @@ onDestroy(() => {
 					</div>
 
 					{#if showPlaylist}
-						<div class="music-playlist" in:slide={{ duration: 180, easing: cubicOut }} out:slide={{ duration: 140 }}>
+						<div class="music-playlist" in:slide={{ duration: 210, easing: quintOut }} out:slide={{ duration: 170, easing: cubicInOut }}>
 							{#each playlist as track, index}
 								<button class:music-playlist__item--active={index === currentIndex} class="music-playlist__item" on:click={() => choose(index)}>
 									<img src={track.cover || "/acofork.jpg"} alt="" class="h-10 w-10 rounded-lg object-cover" />
@@ -250,7 +250,7 @@ onDestroy(() => {
 										<span class="block truncate text-xs text-black/45 dark:text-white/45">{track.artist}</span>
 									</span>
 									{#if index === currentIndex}
-										<Icon icon="material-symbols:graphic-eq-rounded" class={`text-xl text-[var(--primary)] ${isPlaying ? "music-eq--active" : ""}`} />
+										<Icon icon="material-symbols:graphic-eq-rounded" class="text-xl text-[var(--primary)]" />
 									{/if}
 								</button>
 							{/each}
@@ -259,13 +259,13 @@ onDestroy(() => {
 				</div>
 			</section>
 		{:else}
-			<button class="music-player-mini card-base" in:scale={{ start: 0.92, opacity: 0.3, duration: 160, easing: cubicOut }} out:scale={{ start: 0.98, opacity: 0.4, duration: 130 }} on:click={toggleOpen} aria-label="Open music player">
+			<button class="music-player-mini card-base" in:fly={{ y: 8, opacity: 0.15, duration: 200, easing: quintOut }} out:fly={{ y: 8, opacity: 0.1, duration: 160, easing: cubicInOut }} on:click={toggleOpen} aria-label="Open music player">
 				<img src={currentTrack?.cover || "/acofork.jpg"} alt="" class="h-11 w-11 rounded-lg object-cover" />
 				<span class="min-w-0 flex-1 text-left">
 					<span class="block truncate text-sm font-semibold text-black/85 dark:text-white/85">{currentTrack?.title}</span>
 					<span class="block truncate text-xs text-black/45 dark:text-white/45">{currentTrack?.artist}</span>
 				</span>
-				<div class:list={["music-mini-icon", { "music-mini-icon--playing": isPlaying }]}>
+				<div class="music-mini-icon">
 					<Icon icon={isPlaying ? "material-symbols:pause-rounded" : "material-symbols:play-arrow-rounded"} class="text-xl" />
 				</div>
 			</button>
@@ -325,10 +325,6 @@ onDestroy(() => {
 		transition: transform 0.2s ease, background 0.2s ease;
 	}
 
-	.music-mini-icon--playing {
-		animation: musicMiniPulse 1.8s ease-in-out infinite;
-	}
-
 	.music-cover-wrap {
 		height: 5.2rem;
 		width: 5.2rem;
@@ -337,7 +333,7 @@ onDestroy(() => {
 	}
 
 	.music-cover-wrap--playing {
-		animation: musicCoverFloat 3.2s ease-in-out infinite;
+		animation: musicCoverFloat 4.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
 	}
 
 	.music-cover {
@@ -350,7 +346,7 @@ onDestroy(() => {
 	}
 
 	.music-cover-wrap--playing .music-cover {
-		transform: scale(1.03);
+		transform: scale(1.01);
 	}
 
 	.music-progress {
@@ -376,7 +372,7 @@ onDestroy(() => {
 		align-items: center;
 		justify-content: center;
 		border-radius: 0.75rem;
-		transition: transform 0.18s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+		transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), background 0.2s ease, color 0.2s ease, box-shadow 0.22s ease;
 	}
 
 	.music-icon-btn {
@@ -394,13 +390,12 @@ onDestroy(() => {
 		box-shadow: 0 8px 20px color-mix(in oklch, var(--primary) 22%, transparent);
 	}
 
-	.music-icon-btn:hover,
-	.music-play-btn:hover {
+	.music-icon-btn:hover {
 		transform: translateY(-1px);
 	}
 
 	.music-play-btn--active {
-		animation: musicPlayPulse 1.8s ease-in-out infinite;
+		animation: musicPlayBreath 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 	}
 
 	.music-volume {
@@ -432,7 +427,7 @@ onDestroy(() => {
 		padding: 0.55rem;
 		border-radius: 0.75rem;
 		background: transparent;
-		transition: transform 0.18s ease, background 0.2s ease;
+		transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), background 0.2s ease;
 	}
 
 	.music-playlist__item:hover,
@@ -444,51 +439,25 @@ onDestroy(() => {
 		transform: translateX(2px);
 	}
 
-	.music-eq--active {
-		animation: musicEqBounce 1s ease-in-out infinite;
-	}
-
 	@keyframes musicCoverFloat {
 		0%,
 		100% {
 			transform: translateY(0);
 		}
 		50% {
-			transform: translateY(-3px);
+			transform: translateY(-2px);
 		}
 	}
 
-	@keyframes musicPlayPulse {
+	@keyframes musicPlayBreath {
 		0%,
 		100% {
 			transform: scale(1);
 			box-shadow: 0 8px 20px color-mix(in oklch, var(--primary) 22%, transparent);
 		}
 		50% {
-			transform: scale(1.04);
-			box-shadow: 0 12px 26px color-mix(in oklch, var(--primary) 28%, transparent);
-		}
-	}
-
-	@keyframes musicMiniPulse {
-		0%,
-		100% {
-			transform: scale(1);
-		}
-		50% {
-			transform: scale(1.06);
-		}
-	}
-
-	@keyframes musicEqBounce {
-		0%,
-		100% {
-			transform: scaleY(1);
-			opacity: 1;
-		}
-		50% {
-			transform: scaleY(1.12);
-			opacity: 0.72;
+			transform: translateY(-1px) scale(1.02);
+			box-shadow: 0 10px 24px color-mix(in oklch, var(--primary) 26%, transparent);
 		}
 	}
 

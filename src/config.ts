@@ -50,7 +50,7 @@ export const siteConfig: SiteConfig = {
 	},
 	postListLayout: {
 		categoryBar: {
-			enable: true,
+			enable: false,
 			maxItems: 8,
 		},
 	},
