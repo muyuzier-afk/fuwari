@@ -174,17 +174,27 @@
     }
 
     .profile-card__avatar-wrap {
-        @apply overflow-hidden rounded-[1.6rem];
+        @apply overflow-hidden rounded-[1.8rem] p-1;
         background: rgba(255, 255, 255, 0.06);
     }
     .profile-card__avatar {
-        @apply h-[14rem] w-full overflow-hidden rounded-[1.4rem];
+        @apply h-[14rem] w-full overflow-hidden rounded-[1.45rem];
         display: flex;
         align-items: center;
         justify-content: center;
     }
+    .profile-card__avatar picture {
+        width: 100%;
+        height: 100%;
+        display: block;
+        overflow: hidden;
+        border-radius: inherit;
+    }
     .profile-card__avatar img,
     .profile-card__avatar picture img {
+        width: 100%;
+        height: 100%;
+        display: block;
         object-fit: contain !important;
         object-position: center !important;
         border-radius: inherit;
@@ -206,10 +216,10 @@
         opacity: 0.72;
     }
     .profile-card__links {
-        @apply flex items-center justify-center gap-1;
+        @apply flex items-center justify-center gap-1.5;
     }
     .profile-card__icon-link {
-        @apply inline-flex items-center justify-center rounded-lg p-2.5 leading-none transition;
+        @apply inline-flex h-9 w-9 items-center justify-center rounded-md leading-none transition;
         background: rgba(255, 255, 255, 0.45);
         color: rgba(15, 23, 42, 0.76);
         border: 1px solid rgba(15, 23, 42, 0.06);
