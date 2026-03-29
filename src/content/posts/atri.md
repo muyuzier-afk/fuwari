@@ -3,9 +3,7 @@ title: 最近迷上了 Atri
 published: 2026-03-25
 description: 一款不错的 Galgame....
 image: ''
-tags:
-  - Galgame
-  - 生活
+tags: [Galgame, 生活]
 category: Galgame
 draft: false
 lang: zh_CN
