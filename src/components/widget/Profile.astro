@@ -18,7 +18,7 @@ const defaultBio = config.bio || siteConfig.subtitle;
 			<span class="profile-card__cursor" aria-hidden="true"></span>
 		</p>
 	</div>
-	<div class="profile-card__links mt-4">
+	<div class="profile-card__links mt-2">
 		{config.links.slice(0, 3).map((item) => (
 			<a rel="me" aria-label={item.name} href={item.url} target="_blank" class="profile-card__icon-link">
 				<Icon name={item.icon} class="text-[1.25rem]" />
