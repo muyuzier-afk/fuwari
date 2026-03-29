@@ -6,18 +6,30 @@ const currentYear = new Date().getFullYear();
 ---
 
 <div class="mt-10 mb-12">
-	<div class="card-base px-6 py-6 text-center">
-		<div class="text-sm leading-7 text-black/50 dark:text-white/50">
-			&copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name}
+	<div class="card-base rounded-2xl px-6 py-8 text-center">
+		<div class="transition text-50 text-sm leading-relaxed">
+			&copy; <span id="copyright-year">{currentYear}</span>
+			<a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('/')}>{profileConfig.name}</a>
+			，采用
+			<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+			许可
 			<br />
-			<a class="footer-link" target="_blank" href={url("rss.xml")}>RSS</a>
+			网站使用 Fuwari Studio 内容管理系统编辑
+			<br />
+			<a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('rss.xml')}>RSS</a>
 			/
-			<a class="footer-link" target="_blank" href={url("sitemap-index.xml")}>网站地图</a>
+			<a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('sitemap-index.xml')}>网站地图</a>
 			/
-			<a class="footer-link" target="_blank" href="https://umami.moehans.com/share/b1DTwCvclcjiEE5E">Umami</a>
+			<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://umami.moehans.com/share/b1DTwCvclcjiEE5E">Umami</a>
+			<br />
+			由
+			<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a>
+			和
+			<a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
+			强力驱动
 		</div>
 
-		<div class="mt-4 flex flex-wrap justify-center gap-2">
+		<div class="mt-5 flex flex-wrap justify-center gap-2">
 			<a href="https://www.cloudflare.com/" target="_blank" rel="noopener" aria-label="Hosted on Cloudflare">
 				<img src="/badges/hosted-cloudflare.svg" alt="Hosted on Cloudflare" class="h-5 w-auto" loading="lazy" />
 			</a>
