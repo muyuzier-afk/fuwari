@@ -14,15 +14,16 @@ interface Props {
 const { id, name, isCollapsed, collapsedHeight, style } = Astro.props;
 const className = Astro.props.class;
 ---
-<widget-layout data-id={id} data-is-collapsed={String(isCollapsed)} class={"pb-4 card-base " + className} style={style}>
-    <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
-        before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
-        before:absolute before:left-[-16px] before:top-[5.5px]">{name}</div>
-    <div id={id} class:list={["collapse-wrapper px-4 overflow-hidden", {"collapsed": isCollapsed}]}>
+<widget-layout data-id={id} data-is-collapsed={String(isCollapsed)} class={"widget-layout card-base " + className} style={style}>
+    <div class="widget-layout__header">
+        <div class="widget-layout__accent"></div>
+        <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100">{name}</div>
+    </div>
+    <div id={id} class:list={["collapse-wrapper px-4 pb-4 overflow-hidden", {"collapsed": isCollapsed}]}>
         <slot></slot>
     </div>
-    {isCollapsed && <div class="expand-btn px-4 -mb-2">
-        <button class="btn-plain rounded-lg w-full h-9">
+    {isCollapsed && <div class="expand-btn px-4 pb-4">
+        <button class="btn-plain rounded-xl w-full h-10 bg-black/5 dark:bg-white/5">
             <div class="text-[var(--primary)] flex items-center justify-center gap-2 -translate-x-2">
                 <Icon name="material-symbols:more-horiz" class="text-[1.75rem]"></Icon> {i18n(I18nKey.more)}
             </div>
@@ -33,6 +34,21 @@ const className = Astro.props.class;
 <style define:vars={{ collapsedHeight }}>
     .collapsed {
         height: var(--collapsedHeight);
+    }
+
+    .widget-layout__header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 1rem 0.75rem;
+    }
+
+    .widget-layout__accent {
+        width: 0.3rem;
+        height: 1rem;
+        border-radius: 999px;
+        background: var(--primary);
+        box-shadow: 0 0 24px color-mix(in oklch, var(--primary) 30%, transparent);
     }
 </style>
 

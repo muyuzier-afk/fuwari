@@ -1,7 +1,10 @@
 ---
 import type { GetStaticPaths } from "astro";
+import CategoryBar from "../components/CategoryBar.astro";
+import HeroSection from "../components/HeroSection.astro";
 import Pagination from "../components/control/Pagination.astro";
 import PostPage from "../components/PostPage.astro";
+import { siteConfig } from "../config";
 import { PAGE_SIZE } from "../constants/constants";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 import { getSortedPosts } from "../utils/content-utils";
@@ -15,9 +18,12 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props;
 
 const len = page.data.length;
+const showHomeChrome = page.currentPage === 1;
 ---
 
 <MainGridLayout>
+    {showHomeChrome && siteConfig.hero?.enable && <div class="mb-4"><HeroSection /></div>}
+    {siteConfig.postListLayout?.categoryBar.enable && <div class="mb-4"><CategoryBar /></div>}
     <PostPage page={page}></PostPage>
     <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
 </MainGridLayout>

@@ -1,110 +1,206 @@
 ---
+import PageHeader from "@components/PageHeader.astro";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 
-const blogs = [
+const friends = [
 	{
 		name: "AcoFork Blog",
 		desc: "技术分享与实践",
 		url: "https://blog.acofork.com/",
 		avatar: "/acofork.jpg",
+		type: "博客",
+		tags: ["技术", "博客"],
 	},
-];
-
-const forums = [
 	{
 		name: "Linux.do",
 		desc: "新的理想型社区",
 		url: "https://linux.do",
 		avatar: "/friends/linuxdo.svg",
+		type: "社区",
+		tags: ["社区", "论坛"],
 	},
 	{
 		name: "NodeSeek",
 		desc: "VPS 交流社区",
 		url: "https://www.nodeseek.com",
 		avatar: "/friends/nodeseek.png",
+		type: "社区",
+		tags: ["VPS", "论坛"],
 	},
 	{
 		name: "V2EX",
 		desc: "创意工作者的社区",
 		url: "https://www.v2ex.com",
 		avatar: "/friends/v2ex.png",
+		type: "社区",
+		tags: ["社区", "开发者"],
 	},
 	{
 		name: "Hostloc",
 		desc: "全球主机交流论坛",
 		url: "https://hostloc.com",
 		avatar: "/friends/hostloc.ico",
+		type: "社区",
+		tags: ["主机", "论坛"],
 	},
 	{
 		name: "哔哩哔哩",
 		desc: "国内知名视频弹幕网站",
 		url: "https://www.bilibili.com",
 		svg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.659.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373z"/></svg>`,
+		type: "社区",
+		tags: ["视频", "社区"],
 	},
 	{
 		name: "Reddit",
 		desc: "The front page of the internet",
 		url: "https://www.reddit.com",
 		avatar: "/friends/reddit.png",
+		type: "社区",
+		tags: ["社区", "国际"],
 	},
 ];
+
+const filterTags = ["全部", "博客", "社区", "论坛", "技术", "VPS"];
 ---
+
 <MainGridLayout title="友链" description="友情链接">
-    <div class="card-base z-10 px-6 py-6 relative w-full">
-        <h1 class="text-2xl font-bold mb-4 text-neutral-900 dark:text-neutral-100">友情链接</h1>
-        <p class="text-neutral-500 mb-6">欢迎交换友链！</p>
+	<div class="mb-4">
+		<PageHeader
+			title="友链"
+			subtitle="保留友情链接本身，也把这一页做成更完整的专题入口。可以直接搜索、筛选，再从这里跳到你想看的站点。"
+			eyebrow="Friends"
+		/>
+	</div>
 
-        <h2 class="text-lg font-bold mb-3 text-neutral-900 dark:text-neutral-100">博客</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-            {blogs.map(friend => (
-                <a href={friend.url} target="_blank" rel="noopener noreferrer"
-                   class="flex items-center gap-4 p-4 rounded-xl border border-black/10 dark:border-white/10
-                          hover:bg-[var(--btn-plain-bg-hover)] transition-all duration-200
-                          hover:scale-[1.02] active:scale-[0.98]">
-                    <img src={friend.avatar} alt={friend.name}
-                         class="w-14 h-14 rounded-full object-cover flex-shrink-0" />
-                    <div class="overflow-hidden">
-                        <div class="font-bold text-neutral-900 dark:text-neutral-100 truncate">{friend.name}</div>
-                        <div class="text-sm text-neutral-500 truncate">{friend.desc}</div>
-                    </div>
-                </a>
-            ))}
-        </div>
+	<div class="card-base relative w-full overflow-hidden px-6 py-6 md:px-8">
+		<div class="friend-page-glow"></div>
+		<div class="relative z-10 space-y-6">
+			<div class="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+				<label class="friend-search-wrap">
+					<span class="sr-only">搜索友链</span>
+					<input id="friend-search" type="text" placeholder="搜索站点名称、描述或标签" class="friend-search-input" />
+				</label>
+				<div class="flex flex-wrap gap-2" id="friend-filters">
+					{filterTags.map((tag, index) => (
+						<button class:list={["friend-filter", { "friend-filter--active": index === 0 }]} data-filter={tag}>
+							{tag}
+						</button>
+					))}
+				</div>
+			</div>
 
-        <h2 class="text-lg font-bold mb-3 text-neutral-900 dark:text-neutral-100">论坛</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {forums.map(friend => (
-                <a href={friend.url} target="_blank" rel="noopener noreferrer"
-                   class="flex items-center gap-4 p-4 rounded-xl border border-black/10 dark:border-white/10
-                          hover:bg-[var(--btn-plain-bg-hover)] transition-all duration-200
-                          hover:scale-[1.02] active:scale-[0.98]">
-                    {friend.svg ? (
-                        <div class="w-14 h-14 flex-shrink-0 flex items-center justify-center text-[#00a1d6]" set:html={friend.svg} />
-                    ) : (
-                        <img src={friend.avatar} alt={friend.name}
-                             class="w-14 h-14 rounded-full object-cover flex-shrink-0" />
-                    )}
-                    <div class="overflow-hidden">
-                        <div class="font-bold text-neutral-900 dark:text-neutral-100 truncate">{friend.name}</div>
-                        <div class="text-sm text-neutral-500 truncate">{friend.desc}</div>
-                    </div>
-                </a>
-            ))}
-        </div>
+			<div id="friends-grid" class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+				{friends.map((friend) => (
+					<a
+						href={friend.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="friend-card card-base card-hover"
+						data-name={friend.name}
+						data-desc={friend.desc}
+						data-type={friend.type}
+						data-tags={friend.tags.join(" ")}
+					>
+						<div class="friend-card__media">
+							{friend.svg ? (
+								<div class="friend-card__logo friend-card__logo--svg" set:html={friend.svg} />
+							) : (
+								<div class="friend-card__logo">
+									<span class="friend-card__fallback">{friend.name.slice(0, 1)}</span>
+									<img src={friend.avatar} alt={friend.name} class="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" onerror="this.style.display='none'" />
+								</div>
+							)}
+						</div>
+						<div class="min-w-0 flex-1">
+							<div class="mb-2 flex items-center justify-between gap-3">
+								<div class="truncate text-base font-semibold text-black/90 dark:text-white/90">{friend.name}</div>
+								<span class="friend-type-pill">{friend.type}</span>
+							</div>
+							<p class="mb-3 line-clamp-2 text-sm leading-6 text-black/55 dark:text-white/55">{friend.desc}</p>
+							<div class="flex flex-wrap gap-2">
+								{friend.tags.map((tag) => <span class="friend-tag">#{tag}</span>)}
+							</div>
+						</div>
+					</a>
+				))}
+			</div>
 
-        <div class="mt-8 pt-6 border-t border-black/10 dark:border-white/10">
-            <h2 class="text-lg font-bold mb-3 text-neutral-900 dark:text-neutral-100">申请友链</h2>
-            <p class="text-neutral-500 text-sm">请提供：网站名称、描述、链接、图标</p>
-            <p class="text-neutral-500 text-sm mt-2">联系邮箱：<span id="email" class="text-[var(--primary)] cursor-pointer hover:underline"></span></p>
-        </div>
-    </div>
+			<div id="friend-empty" class="hidden rounded-2xl border border-dashed border-black/10 px-6 py-10 text-center text-sm text-black/45 dark:border-white/10 dark:text-white/45">
+				没有匹配结果，试试更短的关键词或者切换筛选标签。
+			</div>
+
+			<div class="friend-apply-card">
+				<div>
+					<div class="text-xs font-semibold uppercase tracking-[0.2em] text-black/45 dark:text-white/45">Apply</div>
+					<h2 class="mt-2 text-xl font-semibold text-black/90 dark:text-white/90">申请友链</h2>
+					<p class="mt-2 text-sm leading-7 text-black/60 dark:text-white/60">请提供网站名称、描述、链接和图标。站点内容长期可访问、设计完整、更新稳定，会更容易通过。</p>
+				</div>
+				<div class="grid gap-3 sm:grid-cols-2">
+					<div class="friend-apply-item">
+						<div class="friend-apply-item__label">联系邮箱</div>
+						<div id="email" class="friend-apply-item__value"></div>
+					</div>
+					<div class="friend-apply-item">
+						<div class="friend-apply-item__label">建议信息</div>
+						<div class="friend-apply-item__value">名称 / 描述 / 链接 / 图标</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </MainGridLayout>
 
-<script>
-const e = ['m','u','y','u','z','i','e','r','@','g','m','a','i','l','.','c','o','m'];
-const el = document.getElementById('email');
-if (el) {
-    el.textContent = e.join('');
-    el.onclick = () => window.location.href = 'mai' + 'lto:' + e.join('');
+<script is:inline>
+const e = ["m","u","y","u","z","i","e","r","@","g","m","a","i","l",".","c","o","m"];
+const email = document.getElementById("email");
+if (email) {
+	email.textContent = e.join("");
+	email.onclick = () => window.location.href = "mai" + "lto:" + e.join("");
 }
+
+const initFriendFilters = () => {
+	const input = document.getElementById("friend-search");
+	const cards = Array.from(document.querySelectorAll(".friend-card"));
+	const filters = Array.from(document.querySelectorAll(".friend-filter"));
+	const empty = document.getElementById("friend-empty");
+	if (!input || !cards.length || !filters.length || !empty) return;
+
+	let active = "全部";
+	const apply = () => {
+		const keyword = input.value.trim().toLowerCase();
+		let visible = 0;
+		for (const card of cards) {
+			const text = [
+				card.getAttribute("data-name") || "",
+				card.getAttribute("data-desc") || "",
+				card.getAttribute("data-type") || "",
+				card.getAttribute("data-tags") || "",
+			].join(" ").toLowerCase();
+			const matchesKeyword = !keyword || text.includes(keyword);
+			const type = card.getAttribute("data-type") || "";
+			const tags = card.getAttribute("data-tags") || "";
+			const matchesFilter = active === "全部" || type === active || tags.includes(active);
+			const show = matchesKeyword && matchesFilter;
+			card.classList.toggle("hidden", !show);
+			if (show) visible += 1;
+		}
+		empty.classList.toggle("hidden", visible !== 0);
+	};
+
+	filters.forEach((filter) => {
+		filter.addEventListener("click", () => {
+			active = filter.dataset.filter || "全部";
+			filters.forEach((item) => item.classList.remove("friend-filter--active"));
+			filter.classList.add("friend-filter--active");
+			apply();
+		});
+	});
+
+	input.addEventListener("input", apply);
+	apply();
+};
+
+initFriendFilters();
+document.addEventListener("astro:after-swap", initFriendFilters);
 </script>

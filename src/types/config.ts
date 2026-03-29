@@ -22,6 +22,12 @@ export type SiteConfig = {
 		hex: string; // 主题色 hex 值，如 "#f06a8b"
 		fixed: boolean;
 	};
+	navbarTitle?: {
+		mode: "text-icon" | "logo";
+		text: string;
+		icon?: string;
+		logo?: string;
+	};
 	banner: {
 		enable: boolean;
 		src: string;
@@ -30,6 +36,29 @@ export type SiteConfig = {
 			enable: boolean;
 			text: string;
 			url?: string;
+		};
+	};
+	hero?: {
+		enable: boolean;
+		badge?: string;
+		title: string;
+		description: string;
+		rotatingLines?: string[];
+		stats?: {
+			label: string;
+			value: string;
+		}[];
+		actions?: {
+			label: string;
+			url: string;
+			external?: boolean;
+			style?: "primary" | "ghost";
+		}[];
+	};
+	postListLayout?: {
+		categoryBar: {
+			enable: boolean;
+			maxItems?: number;
 		};
 	};
 	toc: {
@@ -66,11 +95,28 @@ export type ProfileConfig = {
 	avatar?: string;
 	name: string;
 	bio?: string;
+	status?: string;
+	location?: string;
 	links: {
 		name: string;
 		url: string;
 		icon: string;
 	}[];
+};
+
+export type MusicTrack = {
+	title: string;
+	artist: string;
+	url: string;
+	cover?: string;
+	accent?: string;
+};
+
+export type MusicPlayerConfig = {
+	enable: boolean;
+	startCollapsed?: boolean;
+	title?: string;
+	localPlaylist: MusicTrack[];
 };
 
 export type LicenseConfig = {
