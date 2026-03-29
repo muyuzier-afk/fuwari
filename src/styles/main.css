@@ -174,7 +174,7 @@
     }
 
     .profile-card__avatar-wrap {
-        @apply overflow-hidden rounded-md;
+        @apply overflow-hidden rounded-xl;
         background: rgba(255, 255, 255, 0.06);
     }
     .profile-card__avatar {
@@ -187,9 +187,23 @@
     .profile-card__avatar picture img {
         object-fit: contain !important;
         object-position: center !important;
+        border-radius: 0.9rem;
     }
     :root.dark .profile-card__avatar-wrap {
         background: rgba(255, 255, 255, 0.03);
+    }
+    .profile-card__bio {
+        min-height: 5.5rem;
+        line-height: 1.75;
+    }
+    .profile-card__cursor {
+        display: inline-block;
+        width: 0.55ch;
+        margin-left: 0.08rem;
+        border-right: 2px solid currentColor;
+        transform: translateY(0.08rem);
+        animation: profile-cursor-blink 1s steps(1) infinite;
+        opacity: 0.72;
     }
     .profile-card__links {
         @apply grid grid-cols-3 gap-2;
@@ -364,6 +378,17 @@
     .footer-link:hover {
         color: var(--primary);
         transform: translateY(-1px);
+    }
+}
+
+@keyframes profile-cursor-blink {
+    0%,
+    49% {
+        opacity: 0.72;
+    }
+    50%,
+    100% {
+        opacity: 0;
     }
 }
 

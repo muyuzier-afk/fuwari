@@ -85,7 +85,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/head.gif",
 	name: "MOEHANS",
-	bio: "AI / Serverless / Cloud Native",
+	bio: "优秀的公司赚取利润，伟大的公司赢得人心！",
 	links: [
 		{
 			name: "GitHub",
@@ -104,6 +104,20 @@ export const profileConfig: ProfileConfig = {
 		},
 	],
 };
+
+export const profileQuotes = [
+	"优秀的公司赚取利润，伟大的公司赢得人心！",
+	"永远相信美好的事情即将发生。",
+	"不要用战术上的勤奋，掩盖战略上的懒惰。",
+	"商业成功最重要是：朋友弄得多多的，敌人弄得少少的。",
+	"聪明、勤奋不保证你能成功，真正重要的是顺势而为。",
+	"有机会一定要试一试，其实试错的成本并不高，而错过的成本非常高。",
+	"其实知识并不全是线性的，很多知识点没有绝对的先后顺序。前面看不懂，跳过去没关系的。等后面看懂了，反过来可能就能看懂前面的。",
+	"一定要掌握各种各样的学习方法，养成终身学习的习惯，才足以面对未来所有的挑战。",
+	"一个人的能力再强也是有限的，找互补的朋友一起干，成功概率会大很多。",
+	"创业是使人成长最快的方法。",
+	"只要用心学，我们的能力就一定会成长。成长，比什么东西都重要。只有认知的突破，才会有真正的成长。",
+];
 
 export const licenseConfig: LicenseConfig = {
 	enable: true,

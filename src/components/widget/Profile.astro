@@ -1,9 +1,10 @@
 ---
 import { Icon } from "astro-icon/components";
-import { profileConfig, siteConfig } from "../../config";
+import { profileConfig, profileQuotes, siteConfig } from "../../config";
 import ImageWrapper from "../misc/ImageWrapper.astro";
 
 const config = profileConfig;
+const defaultBio = config.bio || siteConfig.subtitle;
 ---
 
 <div class="profile-card card-base p-4">
@@ -12,7 +13,10 @@ const config = profileConfig;
 	</div>
 	<div class="mt-4 text-center">
 		<div class="text-xl font-bold text-black/90 dark:text-white/90">{config.name}</div>
-		<p class="mt-2 text-sm text-black/55 dark:text-white/55">{config.bio || siteConfig.subtitle}</p>
+		<p id="profile-bio" class="profile-card__bio mt-2 text-sm text-black/55 dark:text-white/55">
+			<span id="profile-bio-text">{defaultBio}</span>
+			<span class="profile-card__cursor" aria-hidden="true"></span>
+		</p>
 	</div>
 	<div class="profile-card__links mt-4">
 		{config.links.slice(0, 3).map((item) => (
@@ -22,3 +26,60 @@ const config = profileConfig;
 		))}
 	</div>
 </div>
+
+<script is:inline define:vars={{ phrases: profileQuotes, fallbackText: defaultBio }}>
+const profileBioInitKey = "__profileBioInit";
+const profileBioTimerKey = "__profileBioTimer";
+
+function initProfileBio() {
+	const textEl = document.getElementById("profile-bio-text");
+	if (!textEl) return;
+
+	const queue = Array.isArray(phrases) && phrases.length > 0 ? phrases : [fallbackText];
+	const segments = queue.map((item) => Array.from(item));
+	let phraseIndex = 0;
+	let charIndex = 0;
+	let isDeleting = false;
+
+	if (window[profileBioTimerKey]) {
+		clearTimeout(window[profileBioTimerKey]);
+	}
+
+	const step = () => {
+		const chars = segments[phraseIndex];
+		if (!isDeleting) {
+			if (charIndex < chars.length) {
+				charIndex += 1;
+				textEl.textContent = chars.slice(0, charIndex).join("");
+				window[profileBioTimerKey] = window.setTimeout(step, 90);
+				return;
+			}
+			isDeleting = true;
+			window[profileBioTimerKey] = window.setTimeout(step, 3000);
+			return;
+		}
+
+		if (charIndex > 0) {
+			charIndex -= 1;
+			textEl.textContent = chars.slice(0, charIndex).join("");
+			window[profileBioTimerKey] = window.setTimeout(step, 42);
+			return;
+		}
+
+		isDeleting = false;
+		phraseIndex = (phraseIndex + 1) % segments.length;
+		window[profileBioTimerKey] = window.setTimeout(step, 260);
+	};
+
+	textEl.textContent = "";
+	window[profileBioTimerKey] = window.setTimeout(step, 240);
+}
+
+if (window[profileBioInitKey]) {
+	document.removeEventListener("astro:after-swap", window[profileBioInitKey]);
+}
+
+window[profileBioInitKey] = initProfileBio;
+document.addEventListener("astro:after-swap", initProfileBio);
+initProfileBio();
+</script>
