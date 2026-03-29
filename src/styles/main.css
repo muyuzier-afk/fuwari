@@ -174,14 +174,16 @@
     }
 
     .profile-card__avatar-wrap {
-        @apply overflow-hidden rounded-[1.8rem] p-1;
-        background: rgba(255, 255, 255, 0.06);
+        @apply overflow-hidden rounded-[2rem] p-1.5;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(15, 23, 42, 0.06);
     }
     .profile-card__avatar {
-        @apply h-[14rem] w-full overflow-hidden rounded-[1.45rem];
+        @apply h-[14rem] w-full overflow-hidden rounded-[1.6rem];
         display: flex;
         align-items: center;
         justify-content: center;
+        background: rgba(255, 255, 255, 0.04);
     }
     .profile-card__avatar picture {
         width: 100%;
@@ -200,7 +202,8 @@
         border-radius: inherit;
     }
     :root.dark .profile-card__avatar-wrap {
-        background: rgba(255, 255, 255, 0.03);
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.08);
     }
     .profile-card__bio {
         min-height: 5.5rem;
@@ -219,7 +222,7 @@
         @apply flex items-center justify-center gap-1.5;
     }
     .profile-card__icon-link {
-        @apply inline-flex h-9 w-9 items-center justify-center rounded-md leading-none transition;
+        @apply inline-flex h-10 w-10 items-center justify-center rounded-md leading-none transition;
         background: rgba(255, 255, 255, 0.45);
         color: rgba(15, 23, 42, 0.76);
         border: 1px solid rgba(15, 23, 42, 0.06);
