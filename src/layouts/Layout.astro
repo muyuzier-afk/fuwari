@@ -288,7 +288,8 @@ const bannerOffset =
 				if (typeof MutationObserver === "undefined") return;
 				const observer = new MutationObserver(() => {
 					clearTimeout(umamiPathStatsObserverTimer);
-					umamiPathStatsObserverTimer = setTimeout(updateUmamiPathStats, 50);
+					// 移除延迟，立即更新访问统计
+					updateUmamiPathStats();
 				});
 				observer.observe(document.body, { childList: true, subtree: true });
 			};
