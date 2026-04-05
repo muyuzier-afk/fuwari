@@ -295,7 +295,7 @@ onDestroy(() => {
 
 	.music-player-panel {
 		padding: 0.9rem;
-		border-radius: 1.5rem;
+		border-radius: 1rem;
 	}
 
 	.music-player-mini {
@@ -304,7 +304,7 @@ onDestroy(() => {
 		align-items: center;
 		gap: 0.875rem;
 		padding: 0.75rem;
-		border-radius: 1.5rem;
+		border-radius: 1rem;
 		transition: transform 0.18s ease, box-shadow 0.18s ease;
 	}
 
