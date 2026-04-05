@@ -176,6 +176,8 @@
     .profile-card__avatar-wrap {
         @apply overflow-hidden;
         border-radius: 1.6rem;
+        position: relative;
+        z-index: 1;
     }
     .profile-card__avatar {
         @apply relative h-[14rem] w-full;
