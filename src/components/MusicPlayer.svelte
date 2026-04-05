@@ -65,9 +65,10 @@ function restoreState() {
 		if (typeof parsed.volume === "number") {
 			volume = Math.min(1, Math.max(0, parsed.volume));
 		}
-		if (typeof parsed.isOpen === "boolean") {
-			isOpen = parsed.isOpen;
-		}
+		// 不恢复 isOpen 状态，总是从配置的 startCollapsed 开始
+		// if (typeof parsed.isOpen === "boolean") {
+		// 	isOpen = parsed.isOpen;
+		// }
 	} catch {}
 }
 
