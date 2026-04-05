@@ -212,8 +212,9 @@ onDestroy(() => {
 							<div class="truncate text-sm text-black/55 dark:text-white/55">{currentTrack?.artist}</div>
 							<div class="mt-3 space-y-2">
 								<button class="music-progress" on:click={seek} aria-label="Seek track">
-									<span class="music-progress__bar" style={`width: ${progress * 100}%`}></span>
-								</button>
+						<span class="music-progress__bar" style={`width: ${progress * 100}%`}></span>
+						<span class="music-progress__dot" style={`left: ${progress * 100}%`}></span>
+					</button>
 								<div class="flex items-center justify-between text-xs text-black/40 dark:text-white/40">
 									<span>{formatTime(currentTime)}</span>
 									<span>{formatTime(duration)}</span>
@@ -259,16 +260,30 @@ onDestroy(() => {
 				</div>
 			</section>
 		{:else}
-			<button class="music-player-mini card-base" in:fly={{ y: 8, opacity: 0.15, duration: 200, easing: quintOut }} out:fly={{ y: 8, opacity: 0.1, duration: 160, easing: cubicInOut }} on:click={toggleOpen} aria-label="Open music player">
-				<img src={currentTrack?.cover || "/acofork.jpg"} alt="" class="h-11 w-11 rounded-lg object-cover" />
-				<span class="min-w-0 flex-1 text-left">
-					<span class="block truncate text-sm font-semibold text-black/85 dark:text-white/85">{currentTrack?.title}</span>
-					<span class="block truncate text-xs text-black/45 dark:text-white/45">{currentTrack?.artist}</span>
-				</span>
-				<div class="music-mini-icon">
-					<Icon icon={isPlaying ? "material-symbols:pause-rounded" : "material-symbols:play-arrow-rounded"} class="text-xl" />
+			<div class="music-player-mini card-base" in:fly={{ y: 8, opacity: 0.15, duration: 200, easing: quintOut }} out:fly={{ y: 8, opacity: 0.1, duration: 160, easing: cubicInOut }}>
+				<div class="flex items-center gap-3 w-full">
+					<button class="music-mini-btn" on:click={prev} aria-label="Previous track">
+						<Icon icon="material-symbols:skip-previous-rounded" class="text-lg" />
+					</button>
+					<img src={currentTrack?.cover || "/acofork.jpg"} alt="" class="h-11 w-11 rounded-lg object-cover" />
+					<div class="min-w-0 flex-1">
+						<span class="block truncate text-sm font-semibold text-black/85 dark:text-white/85">{currentTrack?.title}</span>
+						<span class="block truncate text-xs text-black/45 dark:text-white/45">{currentTrack?.artist}</span>
+						<div class="mt-1">
+							<button class="music-progress music-progress--mini" on:click={seek} aria-label="Seek track">
+								<span class="music-progress__bar" style={`width: ${progress * 100}%`}></span>
+								<span class="music-progress__dot" style={`left: ${progress * 100}%`}></span>
+							</button>
+						</div>
+					</div>
+					<button class="music-mini-play-btn" on:click={togglePlay} aria-label={isPlaying ? "Pause" : "Play"}>
+						<Icon icon={isPlaying ? "material-symbols:pause-rounded" : "material-symbols:play-arrow-rounded"} class="text-xl" />
+					</button>
+					<button class="music-mini-btn" on:click={next} aria-label="Next track">
+						<Icon icon="material-symbols:skip-next-rounded" class="text-lg" />
+					</button>
 				</div>
-			</button>
+			</div>
 		{/if}
 	</div>
 {/if}
@@ -356,6 +371,11 @@ onDestroy(() => {
 		border-radius: 999px;
 		background: rgba(255, 255, 255, 0.08);
 		overflow: hidden;
+		cursor: pointer;
+	}
+
+	.music-progress--mini {
+		height: 0.25rem;
 	}
 
 	.music-progress__bar {
@@ -364,6 +384,52 @@ onDestroy(() => {
 		border-radius: inherit;
 		background: var(--primary);
 		transition: width 0.12s linear;
+	}
+
+	.music-progress__dot {
+		position: absolute;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		height: 0.75rem;
+		width: 0.75rem;
+		border-radius: 50%;
+		background: var(--primary);
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+		transition: left 0.12s linear;
+	}
+
+	.music-mini-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		height: 2.25rem;
+		width: 2.25rem;
+		border-radius: 0.75rem;
+		background: color-mix(in oklch, var(--primary) 8%, transparent);
+		color: color-mix(in oklch, var(--primary) 80%, white 5%);
+		transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), background 0.2s ease, color 0.2s ease;
+	}
+
+	.music-mini-btn:hover {
+		transform: translateY(-1px);
+	}
+
+	.music-mini-play-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		height: 2.5rem;
+		width: 2.5rem;
+		border-radius: 0.75rem;
+		background: var(--primary);
+		color: white;
+		box-shadow: 0 6px 16px color-mix(in oklch, var(--primary) 20%, transparent);
+		transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), background 0.2s ease, color 0.2s ease, box-shadow 0.22s ease;
+	}
+
+	.music-mini-play-btn:hover {
+		transform: translateY(-1px);
+		box-shadow: 0 8px 20px color-mix(in oklch, var(--primary) 24%, transparent);
 	}
 
 	.music-icon-btn,
@@ -418,6 +484,25 @@ onDestroy(() => {
 		gap: 0.55rem;
 		padding-top: 0.5rem;
 		border-top: 1px solid var(--card-border);
+		max-height: 20rem;
+		overflow-y: auto;
+	}
+
+	.music-playlist::-webkit-scrollbar {
+		width: 0.25rem;
+	}
+
+	.music-playlist::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.music-playlist::-webkit-scrollbar-thumb {
+		background: color-mix(in oklch, var(--primary) 30%, transparent);
+		border-radius: 999px;
+	}
+
+	.music-playlist::-webkit-scrollbar-thumb:hover {
+		background: color-mix(in oklch, var(--primary) 40%, transparent);
 	}
 
 	.music-playlist__item {
