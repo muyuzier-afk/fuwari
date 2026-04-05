@@ -34,7 +34,7 @@ export const siteConfig: SiteConfig = {
 		icon: "/favicon/favicon-light-32.png",
 	},
 	banner: {
-		enable: true,
+		enable: false,
 		src: "assets/images/demo-banner.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 		position: "center", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
 		credit: {
