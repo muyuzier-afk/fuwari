@@ -221,7 +221,7 @@
         opacity: 0.72;
     }
     .profile-card__links {
-        @apply flex items-center justify-center gap-1.5;
+        @apply flex items-center justify-center gap-3;
     }
     .profile-card__icon-link {
         @apply inline-flex h-10 w-10 items-center justify-center rounded-md leading-none transition;
