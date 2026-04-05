@@ -65,9 +65,10 @@ function restoreState() {
 		if (typeof parsed.volume === "number") {
 			volume = Math.min(1, Math.max(0, parsed.volume));
 		}
-		if (typeof parsed.isOpen === "boolean") {
-			isOpen = parsed.isOpen;
-		}
+		// 不恢复 isOpen 状态，总是从配置的 startCollapsed 开始
+		// if (typeof parsed.isOpen === "boolean") {
+		// 	isOpen = parsed.isOpen;
+		// }
 	} catch {}
 }
 
@@ -260,9 +261,9 @@ onDestroy(() => {
 				</div>
 			</section>
 		{:else}
-			<div class="music-player-mini card-base" in:fly={{ y: 8, opacity: 0.15, duration: 200, easing: quintOut }} out:fly={{ y: 8, opacity: 0.1, duration: 160, easing: cubicInOut }}>
+			<div class="music-player-mini card-base cursor-pointer" in:fly={{ y: 8, opacity: 0.15, duration: 200, easing: quintOut }} out:fly={{ y: 8, opacity: 0.1, duration: 160, easing: cubicInOut }} on:click={toggleOpen}>
 				<div class="flex items-center gap-3 w-full">
-					<button class="music-mini-btn" on:click={prev} aria-label="Previous track">
+					<button class="music-mini-btn" on:click|stopPropagation={prev} aria-label="Previous track">
 						<Icon icon="material-symbols:skip-previous-rounded" class="text-lg" />
 					</button>
 					<img src={currentTrack?.cover || "/acofork.jpg"} alt="" class="h-11 w-11 rounded-lg object-cover" />
@@ -270,16 +271,16 @@ onDestroy(() => {
 						<span class="block truncate text-sm font-semibold text-black/85 dark:text-white/85">{currentTrack?.title}</span>
 						<span class="block truncate text-xs text-black/45 dark:text-white/45">{currentTrack?.artist}</span>
 						<div class="mt-1">
-							<button class="music-progress music-progress--mini" on:click={seek} aria-label="Seek track">
+							<button class="music-progress music-progress--mini" on:click|stopPropagation={seek} aria-label="Seek track">
 								<span class="music-progress__bar" style={`width: ${progress * 100}%`}></span>
 								<span class="music-progress__dot" style={`left: ${progress * 100}%`}></span>
 							</button>
 						</div>
 					</div>
-					<button class="music-mini-play-btn" on:click={togglePlay} aria-label={isPlaying ? "Pause" : "Play"}>
+					<button class="music-mini-play-btn" on:click|stopPropagation={togglePlay} aria-label={isPlaying ? "Pause" : "Play"}>
 						<Icon icon={isPlaying ? "material-symbols:pause-rounded" : "material-symbols:play-arrow-rounded"} class="text-xl" />
 					</button>
-					<button class="music-mini-btn" on:click={next} aria-label="Next track">
+					<button class="music-mini-btn" on:click|stopPropagation={next} aria-label="Next track">
 						<Icon icon="material-symbols:skip-next-rounded" class="text-lg" />
 					</button>
 				</div>
@@ -370,7 +371,6 @@ onDestroy(() => {
 		width: 100%;
 		border-radius: 999px;
 		background: rgba(255, 255, 255, 0.08);
-		overflow: hidden;
 		cursor: pointer;
 	}
 
@@ -396,6 +396,12 @@ onDestroy(() => {
 		background: var(--primary);
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 		transition: left 0.12s linear;
+		z-index: 1;
+	}
+
+	.music-progress--mini .music-progress__dot {
+		height: 0.6rem;
+		width: 0.6rem;
 	}
 
 	.music-mini-btn {
