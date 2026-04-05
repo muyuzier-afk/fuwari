@@ -181,11 +181,19 @@
     }
     .profile-card__avatar {
         @apply relative h-[14rem] w-full;
+        border-radius: 1.6rem;
+        overflow: hidden;
+    }
+    .profile-card__avatar > div {
+        border-radius: 1.6rem !important;
+        overflow: hidden !important;
     }
     .profile-card__avatar picture {
         width: 100%;
         height: 100%;
         display: block;
+        border-radius: 1.6rem;
+        overflow: hidden;
     }
     .profile-card__avatar img,
     .profile-card__avatar picture img {
@@ -194,6 +202,7 @@
         display: block;
         object-fit: contain !important;
         object-position: center !important;
+        border-radius: 1.6rem;
     }
     .profile-card__bio {
         min-height: 5.5rem;
