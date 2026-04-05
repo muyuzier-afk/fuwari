@@ -8,8 +8,8 @@ const defaultBio = config.bio || siteConfig.subtitle;
 ---
 
 <div class="profile-card card-base p-4">
-	<div class="profile-card__avatar">
-		<ImageWrapper src={config.avatar || ""} alt="Profile Image of the Author" class="profile-card__avatar-img" />
+	<div class="profile-card__avatar-wrap">
+		<ImageWrapper src={config.avatar || ""} alt="Profile Image of the Author" class="profile-card__avatar" />
 	</div>
 	<div class="mt-4 text-center">
 		<div class="text-xl font-bold text-black/90 dark:text-white/90">{config.name}</div>
