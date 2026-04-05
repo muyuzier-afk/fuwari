@@ -333,7 +333,7 @@ onDestroy(() => {
 	}
 
 	.music-cover-wrap--playing {
-		animation: musicCoverFloat 4.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+		animation: musicCoverFloat 4.8s ease-in-out infinite;
 	}
 
 	.music-cover {
@@ -440,24 +440,22 @@ onDestroy(() => {
 	}
 
 	@keyframes musicCoverFloat {
-		0%,
-		100% {
+		0%, 100% {
 			transform: translateY(0);
 		}
 		50% {
-			transform: translateY(-2px);
+			transform: translateY(-3px);
 		}
 	}
 
 	@keyframes musicPlayBreath {
-		0%,
-		100% {
-			transform: scale(1);
+		0%, 100% {
+			transform: scale(1) translateY(0);
 			box-shadow: 0 8px 20px color-mix(in oklch, var(--primary) 22%, transparent);
 		}
 		50% {
-			transform: translateY(-1px) scale(1.02);
-			box-shadow: 0 10px 24px color-mix(in oklch, var(--primary) 26%, transparent);
+			transform: scale(1.05) translateY(-1px);
+			box-shadow: 0 12px 28px color-mix(in oklch, var(--primary) 30%, transparent);
 		}
 	}
 
