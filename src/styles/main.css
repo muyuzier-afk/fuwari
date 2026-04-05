@@ -174,11 +174,13 @@
     }
 
     .profile-card__avatar-wrap {
-        @apply overflow-hidden rounded-[var(--radius-xl)];
-        border-radius: var(--radius-xl);
+        @apply overflow-hidden rounded-[2rem] mx-auto;
+        border-radius: 2rem;
+        width: 14rem;
+        height: 14rem;
     }
     .profile-card__avatar {
-        @apply relative h-[14rem] w-full overflow-hidden;
+        @apply relative w-full h-full overflow-hidden;
         border-radius: inherit;
     }
     .profile-card__avatar picture {
@@ -196,6 +198,14 @@
         object-fit: cover !important;
         object-position: center !important;
         border-radius: inherit;
+    }
+    
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+        .profile-card__avatar-wrap {
+            width: 12rem;
+            height: 12rem;
+        }
     }
     .profile-card__bio {
         min-height: 5.5rem;
