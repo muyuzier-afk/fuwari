@@ -561,6 +561,34 @@ onDestroy(() => {
 			padding: 0.85rem;
 		}
 
+		.music-cover-wrap {
+			height: 4rem;
+			width: 4rem;
+		}
+
+		.music-cover {
+			border-radius: 0.75rem;
+		}
+
+		.music-icon-btn {
+			height: 2.2rem;
+			width: 2.2rem;
+		}
+
+		.music-play-btn {
+			height: 2.4rem;
+			width: 2.4rem;
+		}
+
+		.music-playlist__item {
+			padding: 0.45rem;
+		}
+
+		.music-playlist__item img {
+			height: 2rem;
+			width: 2rem;
+		}
+
 		.music-volume input {
 			width: 4.25rem;
 		}
