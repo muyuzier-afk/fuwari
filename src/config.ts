@@ -9,7 +9,7 @@
 import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
-	title: "MOEHANS BLOG TEST UPDATE",
+	title: "MOEHANS BLOG",
 	subtitle: "Share AI, Serverless, and Cloud Native",
 	description:
 		"Notes, analysis, and tutorials on AI, Serverless, and Cloud Native.",
