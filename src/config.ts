@@ -83,7 +83,7 @@ export const navBarConfig: NavBarConfig = {
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "assets/images/head.gif",
+	avatar: "assets/images/new-avatar.webp",
 	name: "MOEHANS",
 	bio: "优秀的公司赚取利润，伟大的公司赢得人心！",
 	links: [
