@@ -347,6 +347,7 @@
     .friend-type-pill {
         background: color-mix(in oklch, var(--primary) 18%, transparent);
         color: var(--primary);
+        white-space: nowrap;
     }
     .friend-tag {
         background: rgba(255, 255, 255, 0.7);
