@@ -191,8 +191,8 @@ onDestroy(() => {
 				<div class="flex flex-col gap-4">
 					<div class="flex items-center justify-between gap-4">
 						<div>
-							<div class="text-sm font-semibold text-black/85">{musicPlayerConfig.title || "Playlist"}</div>
-			<div class="mt-1 text-xs text-black/45">本地歌单</div>
+							<div class="text-sm font-semibold text-black/85 dark:text-white/85">{musicPlayerConfig.title || "Playlist"}</div>
+			<div class="mt-1 text-xs text-black/45 dark:text-white/45">本地歌单</div>
 						</div>
 						<div class="flex items-center gap-2">
 							<button class="music-icon-btn" on:click={() => (showPlaylist = !showPlaylist)} aria-label="Toggle playlist">
@@ -209,14 +209,14 @@ onDestroy(() => {
 							<img src={currentTrack?.cover || "/acofork.jpg"} alt={currentTrack?.title || "Track cover"} class="music-cover" />
 						</div>
 						<div class="min-w-0">
-							<div class="truncate text-base font-semibold text-black/90">{currentTrack?.title}</div>
-				<div class="truncate text-sm text-black/55">{currentTrack?.artist}</div>
+							<div class="truncate text-base font-semibold text-black/90 dark:text-white/90">{currentTrack?.title}</div>
+				<div class="truncate text-sm text-black/55 dark:text-white/55">{currentTrack?.artist}</div>
 							<div class="mt-3 space-y-2">
 								<button class="music-progress" on:click={seek} aria-label="Seek track">
 						<span class="music-progress__bar" style={`width: ${progress * 100}%`}></span>
 						<span class="music-progress__dot" style={`left: ${progress * 100}%`}></span>
 					</button>
-								<div class="flex items-center justify-between text-xs text-black/40">
+								<div class="flex items-center justify-between text-xs text-black/40 dark:text-white/40">
 									<span>{formatTime(currentTime)}</span>
 									<span>{formatTime(duration)}</span>
 								</div>
@@ -237,7 +237,7 @@ onDestroy(() => {
 							</button>
 						</div>
 						<label class="music-volume">
-					<Icon icon="material-symbols:volume-up-rounded" class="text-lg text-black/55" />
+					<Icon icon="material-symbols:volume-up-rounded" class="text-lg text-black/55 dark:text-white/55" />
 					<input type="range" min="0" max="1" step="0.01" bind:value={volume} on:input={changeVolume} aria-label="Volume" />
 				</label>
 					</div>
@@ -248,8 +248,8 @@ onDestroy(() => {
 								<button class:music-playlist__item--active={index === currentIndex} class="music-playlist__item" on:click={() => choose(index)}>
 									<img src={track.cover || "/acofork.jpg"} alt="" class="h-10 w-10 rounded-lg object-cover" />
 									<span class="min-w-0 flex-1 text-left">
-							<span class="block truncate text-sm font-medium text-black/85">{track.title}</span>
-							<span class="block truncate text-xs text-black/45">{track.artist}</span>
+							<span class="block truncate text-sm font-medium text-black/85 dark:text-white/85">{track.title}</span>
+							<span class="block truncate text-xs text-black/45 dark:text-white/45">{track.artist}</span>
 						</span>
 									{#if index === currentIndex}
 										<Icon icon="material-symbols:graphic-eq-rounded" class="text-xl text-[var(--primary)]" />
@@ -268,8 +268,8 @@ onDestroy(() => {
 					</button>
 					<img src={currentTrack?.cover || "/acofork.jpg"} alt="" class="h-11 w-11 rounded-lg object-cover" />
 					<div class="min-w-0 flex-1">
-						<span class="block truncate text-sm font-semibold text-black/85">{currentTrack?.title}</span>
-					<span class="block truncate text-xs text-black/45">{currentTrack?.artist}</span>
+						<span class="block truncate text-sm font-semibold text-black/85 dark:text-white/85">{currentTrack?.title}</span>
+					<span class="block truncate text-xs text-black/45 dark:text-white/45">{currentTrack?.artist}</span>
 						<div class="mt-1">
 							<button class="music-progress music-progress--mini" on:click|stopPropagation={seek} aria-label="Seek track">
 								<span class="music-progress__bar" style={`width: ${progress * 100}%`}></span>
@@ -302,6 +302,10 @@ onDestroy(() => {
 		-webkit-backdrop-filter: blur(16px);
 		box-shadow: var(--shadow-sm);
 		transform-origin: bottom right;
+	}
+	:global(.dark) .music-player-panel,
+	:global(.dark) .music-player-mini {
+		background: rgba(15, 23, 42, 0.85);
 	}
 
 	.music-player-panel {

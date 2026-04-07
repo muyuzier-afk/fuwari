@@ -9,6 +9,9 @@
         border: 1px solid var(--card-border);
         box-shadow: var(--shadow-sm);
     }
+    .dark .card-base {
+        background-color: rgba(15, 23, 42, 0.85);
+    }
     .card-hover:hover {
         box-shadow: var(--shadow-sm);
     }
@@ -36,6 +39,9 @@
         background-color: rgba(255, 255, 255, 0.85);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
+    }
+    .dark .float-panel {
+        background-color: rgba(15, 23, 42, 0.85);
     }
     .float-panel-closed {
         @apply -translate-y-1 opacity-0 pointer-events-none
@@ -132,6 +138,10 @@
         -webkit-backdrop-filter: blur(16px);
         box-shadow: var(--shadow-sm);
     }
+    .dark .navbar-shell {
+        background: rgba(15, 23, 42, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
     .enable-banner #navbar[data-is-home="true"]:not(.scrolled) .navbar-shell {
         box-shadow: none;
     }
@@ -144,6 +154,11 @@
         @apply inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition;
         background: rgba(255, 255, 255, 0.7);
         color: rgba(15, 23, 42, 0.78);
+        border: 1px solid rgba(120, 180, 255, 0.2);
+    }
+    .dark .category-pill {
+        background: rgba(15, 23, 42, 0.7);
+        color: rgba(255, 255, 255, 0.78);
         border: 1px solid rgba(120, 180, 255, 0.2);
     }
     .category-pill:hover,
@@ -215,6 +230,11 @@
         color: rgba(15, 23, 42, 0.76);
         border: 1px solid rgba(120, 180, 255, 0.2);
     }
+    .dark .profile-card__icon-link {
+        background: rgba(15, 23, 42, 0.7);
+        color: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(120, 180, 255, 0.2);
+    }
     .profile-card__icon-link:hover {
         color: var(--primary);
     }
@@ -223,6 +243,11 @@
         @apply inline-flex items-center rounded-md px-3 py-1.5 text-xs font-semibold tracking-[0.08em] transition;
         background: rgba(255, 255, 255, 0.7);
         color: rgba(15, 23, 42, 0.62);
+        border: 1px solid rgba(120, 180, 255, 0.2);
+    }
+    .dark .post-card__tag {
+        background: rgba(15, 23, 42, 0.7);
+        color: rgba(255, 255, 255, 0.62);
         border: 1px solid rgba(120, 180, 255, 0.2);
     }
     .post-card__tag:hover {
@@ -235,6 +260,11 @@
     .post-card__meta-strip {
         @apply inline-flex w-fit items-center gap-3 rounded-md px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-black/45;
         background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(120, 180, 255, 0.2);
+    }
+    .dark .post-card__meta-strip {
+        color: white/45;
+        background: rgba(15, 23, 42, 0.7);
         border: 1px solid rgba(120, 180, 255, 0.2);
     }
 
@@ -264,6 +294,11 @@
     .friend-search-input {
         @apply h-11 w-full rounded-md border border-[rgba(120,180,255,0.2)] bg-[rgba(255,255,255,0.7)] pl-12 pr-4 text-sm outline-none transition;
     }
+    .dark .friend-search-input {
+        border: border-[rgba(120,180,255,0.2)];
+        background: rgba(15, 23, 42, 0.7);
+        color: rgba(255, 255, 255, 0.7);
+    }
     .friend-search-input:focus {
         border-color: color-mix(in oklch, var(--primary) 40%, transparent);
         box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 12%, transparent);
@@ -272,6 +307,11 @@
         @apply h-10 rounded-md px-4 text-sm font-semibold transition;
         background: rgba(255, 255, 255, 0.7);
         color: rgba(15, 23, 42, 0.62);
+        border: 1px solid rgba(120, 180, 255, 0.2);
+    }
+    .dark .friend-filter {
+        background: rgba(15, 23, 42, 0.7);
+        color: rgba(255, 255, 255, 0.62);
         border: 1px solid rgba(120, 180, 255, 0.2);
     }
     .friend-filter:hover,
@@ -288,6 +328,10 @@
     }
     .friend-card__logo {
         @apply relative h-14 w-14 overflow-hidden rounded-md bg-white/70;
+        border: 1px solid rgba(120, 180, 255, 0.2);
+    }
+    .dark .friend-card__logo {
+        background: rgba(15, 23, 42, 0.7);
         border: 1px solid rgba(120, 180, 255, 0.2);
     }
     .friend-card__logo--svg {
@@ -308,9 +352,17 @@
         background: rgba(255, 255, 255, 0.7);
         color: rgba(15, 23, 42, 0.56);
     }
+    .dark .friend-tag {
+        background: rgba(15, 23, 42, 0.7);
+        color: rgba(255, 255, 255, 0.56);
+    }
     .friend-apply-card {
         @apply rounded-md p-5 md:p-6;
         background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(120, 180, 255, 0.2);
+    }
+    .dark .friend-apply-card {
+        background: rgba(15, 23, 42, 0.7);
         border: 1px solid rgba(120, 180, 255, 0.2);
     }
     .friend-apply-item {
@@ -318,11 +370,21 @@
         background: rgba(255, 255, 255, 0.7);
         border: 1px solid rgba(120, 180, 255, 0.2);
     }
+    .dark .friend-apply-item {
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(120, 180, 255, 0.2);
+    }
     .friend-apply-item__label {
         @apply text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-black/40;
     }
+    .dark .friend-apply-item__label {
+        color: white/40;
+    }
     .friend-apply-item__value {
         @apply mt-2 text-sm font-medium text-black/80;
+    }
+    .dark .friend-apply-item__value {
+        color: white/80;
     }
 
     .footer-card {
@@ -331,6 +393,10 @@
     .footer-link {
         @apply rounded-md px-3 py-1.5 transition;
         background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(120, 180, 255, 0.2);
+    }
+    .dark .footer-link {
+        background: rgba(15, 23, 42, 0.7);
         border: 1px solid rgba(120, 180, 255, 0.2);
     }
     .footer-link:hover {
