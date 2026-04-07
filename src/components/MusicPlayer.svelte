@@ -555,6 +555,11 @@ onDestroy(() => {
 		.music-player-panel {
 			padding: 0.85rem;
 		}
+		
+		.music-player-panel.is-open {
+			max-height: 600px;
+			overflow: visible;
+		}
 
 		.music-cover-wrap {
 			height: 4rem;
