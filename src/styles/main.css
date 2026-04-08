@@ -159,7 +159,7 @@
     .dark .category-pill {
         background: rgba(15, 23, 42, 0.7);
         color: rgba(255, 255, 255, 0.78);
-        border: 1px solid rgba(120, 180, 255, 0.2);
+        border: 1px solid transparent;
     }
     .category-pill:hover,
     .category-pill-active {
@@ -233,7 +233,7 @@
     .dark .profile-card__icon-link {
         background: rgba(15, 23, 42, 0.7);
         color: rgba(255, 255, 255, 0.76);
-        border: 1px solid rgba(120, 180, 255, 0.2);
+        border: 1px solid transparent;
     }
     .profile-card__icon-link:hover {
         color: var(--primary);
@@ -248,7 +248,7 @@
     .dark .post-card__tag {
         background: rgba(15, 23, 42, 0.7);
         color: rgba(255, 255, 255, 0.62);
-        border: 1px solid rgba(120, 180, 255, 0.2);
+        border: 1px solid transparent;
     }
     .post-card__tag:hover {
         color: var(--primary);
@@ -265,7 +265,7 @@
     .dark .post-card__meta-strip {
         color: white/45;
         background: rgba(15, 23, 42, 0.7);
-        border: 1px solid rgba(120, 180, 255, 0.2);
+        border: 1px solid transparent;
     }
 
     .friend-search-wrap {
@@ -312,7 +312,7 @@
     .dark .friend-filter {
         background: rgba(15, 23, 42, 0.7);
         color: rgba(255, 255, 255, 0.62);
-        border: 1px solid rgba(120, 180, 255, 0.2);
+        border: 1px solid transparent;
     }
     .friend-filter:hover,
     .friend-filter--active {
@@ -332,7 +332,7 @@
     }
     .dark .friend-card__logo {
         background: rgba(15, 23, 42, 0.7);
-        border: 1px solid rgba(120, 180, 255, 0.2);
+        border: 1px solid transparent;
     }
     .friend-card__logo--svg {
         @apply flex items-center justify-center p-3 text-[#00a1d6];
@@ -364,7 +364,7 @@
     }
     .dark .friend-apply-card {
         background: rgba(15, 23, 42, 0.7);
-        border: 1px solid rgba(120, 180, 255, 0.2);
+        border: 1px solid transparent;
     }
     .friend-apply-item {
         @apply rounded-md px-4 py-4;
@@ -373,7 +373,7 @@
     }
     .dark .friend-apply-item {
         background: rgba(15, 23, 42, 0.7);
-        border: 1px solid rgba(120, 180, 255, 0.2);
+        border: 1px solid transparent;
     }
     .friend-apply-item__label {
         @apply text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-black/40;
@@ -398,7 +398,7 @@
     }
     .dark .footer-link {
         background: rgba(15, 23, 42, 0.7);
-        border: 1px solid rgba(120, 180, 255, 0.2);
+        border: 1px solid transparent;
     }
     .footer-link:hover {
         color: var(--primary);
