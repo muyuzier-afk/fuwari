@@ -1,0 +1,83 @@
+---
+import PageHeader from "@components/PageHeader.astro";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
+
+const links = [
+	{
+		name: "Copaw",
+		url: "https://copaw.moehans.com",
+		desc: "AI 编程助理，让编程更简单高效",
+		icon: "fa6-brands:robot",
+		tags: ["AI", "编程", "工具"],
+	},
+	{
+		name: "Git",
+		url: "https://git.moehans.com",
+		desc: "Git 代码仓库，托管和管理代码项目",
+		icon: "fa6-brands:git-alt",
+		tags: ["代码", "Git", "开发"],
+	},
+	{
+		name: "Umami",
+		url: "https://umami.moehans.com",
+		desc: "网站数据分析工具，简洁美观的访问统计",
+		icon: "fa6-solid:chart-line",
+		tags: ["分析", "统计", "数据"],
+	},
+	{
+		name: "Files",
+		url: "https://files.moehans.com",
+		desc: "文件管理和分享平台，便捷的云存储服务",
+		icon: "fa6-solid:folder",
+		tags: ["文件", "存储", "分享"],
+	},
+	{
+		name: "News",
+		url: "https://news.moehans.com",
+		desc: "资讯聚合平台，及时获取最新动态",
+		icon: "fa6-solid:newspaper",
+		tags: ["资讯", "新闻", "阅读"],
+	},
+];
+---
+
+<MainGridLayout title="链接" description="常用链接与服务">
+	<div class="mb-4">
+		<PageHeader
+			title="链接"
+			subtitle="常用的链接与服务导航"
+		/>
+	</div>
+
+	<div class="card-base w-full px-6 py-6 md:px-8">
+		<div class="space-y-6">
+			<div id="links-grid" class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+				{links.map((link) => (
+					<a
+						href={link.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="friend-card card-base card-hover"
+					>
+						<div class="friend-card__media">
+							<div class="friend-card__logo flex items-center justify-center">
+								<Icon name={link.icon} class="text-[2rem] text-[var(--primary)]" />
+							</div>
+						</div>
+						<div class="min-w-0 flex-1">
+							<div class="mb-2 flex items-center justify-between gap-3">
+								<div class="truncate text-base font-semibold text-black/90 dark:text-white/90">{link.name}</div>
+								<Icon name="fa6-solid:arrow-up-right-from-square" class="text-black/[0.2] dark:text-white/[0.2]" />
+							</div>
+							<p class="mb-3 line-clamp-2 text-sm leading-6 text-black/55 dark:text-white/55">{link.desc}</p>
+							<div class="flex flex-wrap gap-2">
+								{link.tags.map((tag) => <span class="friend-tag">#{tag}</span>)}
+							</div>
+						</div>
+					</a>
+				))}
+			</div>
+		</div>
+	</div>
+</MainGridLayout>

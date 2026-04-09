@@ -70,13 +70,18 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Home,
 		LinkPreset.Archive,
 		{
+			name: "链接",
+			url: "/links/",
+			external: false,
+		},
+		{
 			name: "友链",
 			url: "/friends/",
 			external: false,
 		},
 		{
 			name: "Umami",
-			url: "https://umami.moehans.com/share/b1DTwCvclcjiEE5E",
+			url: "https://umami.moehans.com/share/nExEh26nJLpeMU09",
 			external: true,
 		},
 	],
