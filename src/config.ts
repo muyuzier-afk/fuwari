@@ -80,6 +80,11 @@ export const navBarConfig: NavBarConfig = {
 			external: false,
 		},
 		{
+			name: "UptimeKuma",
+			url: "https://uptime.moehans.com/status/uptime",
+			external: true,
+		},
+		{
 			name: "Umami",
 			url: "https://umami.moehans.com/share/nExEh26nJLpeMU09",
 			external: true,
